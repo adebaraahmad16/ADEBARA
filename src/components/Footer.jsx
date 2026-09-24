@@ -47,10 +47,6 @@ export default function Footer() {
           <p>
             © {new Date().getFullYear()} Adebara Ahmad. All rights reserved.
           </p>
-          <p className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
-            <span>Built with React & Tailwind CSS</span>
-          </p>
         </div>
       </div>
     </footer>
