@@ -1,41 +1,45 @@
-import { useState } from 'react';
+import ProjectCard from './ProjectCard';
 
 export default function Projects({ onSelectProject }) {
+  // All portfolio projects with dedicated screenshots and details
   const projects = [
     {
       id: 'poultrypro',
       title: 'PoultryPro',
-      tagline: 'Poultry Management Application',
-      status: 'Currently Building',
-      statusColor: 'bg-amber-950/60 text-amber-300 border-amber-500/30',
+      tagline: 'Poultry Management Platform',
+      projectImage: '/projects/poultrypro.png',
+      status: 'Production Ready',
+      statusColor: 'bg-emerald-950/80 text-emerald-300 border-emerald-500/40',
       role: 'Frontend Developer & Creator',
       description:
-        'A modern poultry management system designed to streamline flock tracking, daily egg and feed recording, mortality analysis, and inventory reporting for poultry farm operations.',
-      technologies: ['React', 'Tailwind CSS', 'JavaScript', 'State Management', 'Data Visualization'],
+        'A comprehensive commercial poultry farm management SaaS platform engineered with React, Tailwind CSS, and Recharts. Streamlines flock lifecycle management, feed inventory logs, egg production tracking, mortality analytics, financial records, and real-time operational reporting.',
+      technologies: ['React', 'Tailwind CSS', 'JavaScript', 'Recharts', 'Lucide React', 'Context API'],
       highlights: [
-        'Interactive flock health & mortality tracking dashboard',
-        'Daily feed consumption and egg production logs',
-        'Real-time inventory calculation and financial summaries',
-        'Responsive mobile-first layout for on-field farm management',
+        'Interactive flock health, mortality analytics & egg production logs',
+        'Daily feed consumption tracking and live inventory management',
+        'Real-time financial summary dashboards and profitability metrics',
+        'Fully responsive mobile-friendly UX for on-farm field workers',
       ],
-      mockupBg: 'from-amber-950/40 via-[#0a120e] to-emerald-950/40',
-      accentColor: 'text-amber-400',
+      mockupBg: 'from-emerald-950/40 via-[#0a120e] to-amber-950/40',
+      accentColor: 'text-emerald-400',
       githubAvailable: true,
+      liveUrl: 'http://localhost:5175',
     },
     {
       id: 'tradehub',
       title: 'TradeHub',
       tagline: 'Multi-Vendor Marketplace Platform',
-      status: 'Completed Build',
-      statusColor: 'bg-emerald-950/60 text-emerald-300 border-emerald-500/30',
+      projectImage: '/projects/tradehub.png',
+      status: 'Production Ready',
+      statusColor: 'bg-emerald-950/80 text-emerald-300 border-emerald-500/40',
       role: 'Frontend Developer',
       description:
-        'A high-performance commercial marketplace platform delivering seamless vendor storefront browsing, dynamic product filtering, responsive cart flows, and optimized checkout experiences.',
-      technologies: ['React', 'Tailwind CSS', 'JavaScript', 'Responsive UI', 'REST API Integration'],
+        'A high-performance commercial marketplace platform delivering seamless vendor storefront browsing, dynamic product filtering, responsive cart flows, secure checkout flows, and vendor management.',
+      technologies: ['React', 'Tailwind CSS', 'Redux Toolkit', 'JavaScript', 'REST API'],
       highlights: [
-        'Dynamic multi-category catalog with instant filtering',
-        'Interactive vendor profile and storefront showcase',
-        'Accessible cart drawer and responsive multi-step checkout',
+        'Dynamic multi-category catalog with instant multi-parameter filtering',
+        'Interactive vendor storefront and verified seller verification',
+        'Accessible cart drawer and responsive multi-step checkout workflow',
         'Smooth micro-interactions and high-conversion UI patterns',
       ],
       mockupBg: 'from-emerald-950/40 via-[#0a120e] to-teal-950/40',
@@ -45,32 +49,34 @@ export default function Projects({ onSelectProject }) {
     {
       id: 'freelearninghub',
       title: 'Free Learning Hub',
-      tagline: 'Education Resource & School Management Platform',
+      tagline: 'Education Resource & School Portal',
+      projectImage: '/projects/free-learning-hub.png',
       status: 'Production Ready',
-      statusColor: 'bg-emerald-950/60 text-emerald-300 border-emerald-500/30',
-      role: 'Frontend Developer',
+      statusColor: 'bg-blue-950/80 text-blue-300 border-blue-500/40',
+      role: 'Frontend Developer & Educator',
       description:
-        'An accessible digital learning platform connecting students and educators with curated educational materials, structured curriculum portals, and intuitive school administrative tools.',
-      technologies: ['React', 'Tailwind CSS', 'JavaScript', 'HTML5', 'CSS3'],
+        'An accessible digital learning platform connecting students and educators with curated educational materials, structured curriculum portals, online CBT mock examinations, and school administrative tools.',
+      technologies: ['JavaScript', 'HTML5', 'CSS3', 'Bootstrap 5', 'Responsive UI'],
       highlights: [
-        'Organized digital learning repository by grade level and topic',
-        'Intuitive student and instructor dashboard interfaces',
-        'Fast lightweight asset delivery and mobile responsiveness',
-        'Designed to empower underserved learners with open knowledge',
+        'Organized digital learning repository by grade level and curriculum topic',
+        'Intuitive student, instructor and administrator dashboard interfaces',
+        'Fast lightweight asset delivery and mobile responsiveness for low-bandwidth',
+        'Empowering underserved students with accessible digital education',
       ],
       mockupBg: 'from-blue-950/40 via-[#0a120e] to-emerald-950/40',
-      accentColor: 'text-emerald-400',
+      accentColor: 'text-blue-400',
       githubAvailable: true,
     },
     {
       id: 'nobelle',
       title: 'NOBELLE',
       tagline: 'Modern African Fashion E-Commerce Experience',
+      projectImage: '/projects/nobelle.png',
       status: 'Production Ready',
-      statusColor: 'bg-amber-950/60 text-amber-300 border-amber-500/30',
+      statusColor: 'bg-amber-950/80 text-amber-300 border-amber-500/40',
       role: 'Frontend Developer',
       description:
-        'A luxury digital storefront celebrating contemporary African haute couture. Features editorial product visuals, curated lookbooks, responsive sizing selectors, and a refined brand aesthetic.',
+        'A luxury digital storefront celebrating contemporary African haute couture. Features editorial product visuals, curated lookbooks, responsive sizing selectors, and a refined dark brand aesthetic with gold highlights.',
       technologies: ['React', 'Tailwind CSS', 'JavaScript', 'Interactive UI', 'Modern Styling'],
       highlights: [
         'Editorial fashion layout with immersive hero storytelling',
@@ -96,149 +102,18 @@ export default function Projects({ onSelectProject }) {
             Selected Projects
           </h2>
           <p className="mt-3 text-neutral-400 text-sm sm:text-base">
-            Carefully engineered frontend applications focusing on performance, usability, responsive design, and real-world utility.
+            Every application below is built with modern web technologies, showcasing real production interfaces with live landing page screenshots as card backgrounds.
           </p>
         </div>
 
-        {/* Large Project Cards Grid */}
+        {/* Polished Grid Layout: All projects visible without category filters, pagination or carousel restrictions */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((proj) => (
-            <div
+            <ProjectCard
               key={proj.id}
-              className="group flex flex-col rounded-2xl bg-[#080d0a] border border-emerald-900/30 hover:border-emerald-600/50 transition-all duration-300 overflow-hidden shadow-xl hover:shadow-[0_20px_40px_rgba(0,0,0,0.8)]"
-            >
-              {/* Project Visual / Mockup Area */}
-              <div
-                className={`relative h-56 sm:h-64 bg-gradient-to-br ${proj.mockupBg} border-b border-emerald-950 p-6 flex flex-col justify-between overflow-hidden`}
-              >
-                {/* Background Pattern */}
-                <div
-                  className="absolute inset-0 opacity-10 pointer-events-none"
-                  style={{
-                    backgroundImage:
-                      'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
-                    backgroundSize: '24px 24px',
-                  }}
-                />
-
-                {/* Top Bar with Status and Role */}
-                <div className="relative z-10 flex items-center justify-between">
-                  <span
-                    className={`text-[11px] font-semibold px-3 py-1 rounded-full border ${proj.statusColor}`}
-                  >
-                    {proj.status}
-                  </span>
-                  <span className="text-[11px] font-medium px-2.5 py-1 rounded-md bg-[#050806]/80 text-neutral-300 border border-neutral-700/50 backdrop-blur-sm">
-                    {proj.role}
-                  </span>
-                </div>
-
-                {/* Mockup Graphic / Wireframe Card */}
-                <div className="relative z-10 my-auto p-4 rounded-xl bg-[#090e0b]/90 border border-emerald-800/30 shadow-2xl backdrop-blur-md transform group-hover:scale-[1.02] transition-transform duration-300">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
-                    <span className="text-[11px] font-mono text-neutral-400 ml-1">
-                      {proj.title}.interface
-                    </span>
-                  </div>
-                  <div className="space-y-1.5">
-                    <div className="h-2 w-3/4 rounded bg-emerald-500/20" />
-                    <div className="h-2 w-1/2 rounded bg-amber-500/20" />
-                    <div className="flex gap-2 pt-1">
-                      <div className="h-5 w-16 rounded bg-neutral-800/80 text-[9px] font-mono text-neutral-400 flex items-center justify-center">
-                        Active UI
-                      </div>
-                      <div className="h-5 w-20 rounded bg-neutral-800/80 text-[9px] font-mono text-emerald-400 flex items-center justify-center">
-                        Responsive
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Bottom Title overlay */}
-                <div className="relative z-10">
-                  <h3 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
-                    {proj.title}
-                  </h3>
-                  <p className="text-xs text-neutral-400 font-medium">
-                    {proj.tagline}
-                  </p>
-                </div>
-              </div>
-
-              {/* Card Body */}
-              <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between space-y-6">
-                <div>
-                  <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed mb-4">
-                    {proj.description}
-                  </p>
-
-                  {/* Highlights Bullet List */}
-                  <ul className="space-y-1.5 mb-5">
-                    {proj.highlights.slice(0, 2).map((item, idx) => (
-                      <li
-                        key={idx}
-                        className="flex items-start gap-2 text-xs text-neutral-400"
-                      >
-                        <span className="text-emerald-400 font-bold mt-0.5">✓</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Technology Tags */}
-                  <div className="flex flex-wrap gap-1.5">
-                    {proj.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-[11px] font-medium px-2.5 py-1 rounded-md bg-[#0d1410] text-neutral-300 border border-emerald-950 hover:border-emerald-800 transition-colors"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="pt-4 border-t border-neutral-800/70 flex items-center gap-3">
-                  <button
-                    onClick={() => onSelectProject(proj)}
-                    className="flex-1 py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white text-xs font-bold transition-all shadow-[0_0_15px_rgba(16,185,129,0.25)] flex items-center justify-center gap-1.5"
-                  >
-                    <span>View Project</span>
-                    <svg
-                      className="w-3.5 h-3.5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M14 5l7 7m0 0l-7 7m7-7H3"
-                      />
-                    </svg>
-                  </button>
-
-                  <button
-                    onClick={() => onSelectProject(proj, 'github')}
-                    className="py-2.5 px-4 rounded-xl bg-[#0d1410] border border-neutral-700 hover:border-amber-400/50 text-neutral-300 hover:text-white text-xs font-semibold transition-all flex items-center gap-1.5"
-                    title="View Code Repository Details"
-                  >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                      />
-                    </svg>
-                    <span>GitHub</span>
-                  </button>
-                </div>
-              </div>
-            </div>
+              project={proj}
+              onSelectProject={onSelectProject}
+            />
           ))}
         </div>
       </div>

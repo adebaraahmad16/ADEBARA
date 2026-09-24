@@ -128,15 +128,17 @@ export default function Hero({ onOpenCV }) {
               </a>
 
               {/* Download CV */}
-              <button
-                onClick={onOpenCV}
-                className="px-5 py-3 rounded-xl border border-amber-500/40 text-amber-300 hover:bg-amber-500/10 hover:border-amber-400 font-semibold text-sm transition-all duration-200 flex items-center gap-2 cursor-pointer"
+              <a
+                href="/docs/Adebara-Bamigbola-Ahmad-CV.docx"
+                download="Adebara-Bamigbola-Ahmad-CV.docx"
+                className="px-5 py-3 rounded-xl border border-amber-500/40 text-amber-300 hover:bg-amber-500/10 hover:border-amber-400 font-semibold text-sm transition-all duration-200 flex items-center gap-2 cursor-pointer shadow-sm hover:shadow-[0_0_15px_rgba(251,191,36,0.25)]"
+                title="Download Adebara Ahmad CV (Word Document)"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
-                Download CV
-              </button>
+                <span>Download CV</span>
+              </a>
             </div>
 
             {/* Quick Micro-stats */}

@@ -20,6 +20,9 @@ export const PROFILE = {
   description:
     'Dedicated to building high-performance, accessible web interfaces and mentoring aspiring technologists. Combining modern frontend engineering with interactive digital pedagogy.',
 
+  cvUrl: '/docs/Adebara-Bamigbola-Ahmad-CV.docx',
+  cvFileName: 'Adebara-Bamigbola-Ahmad-CV.docx',
+
   ctas: {
     primary: { label: 'View My Work', href: '#projects' },
     secondary: { label: 'Contact Me', href: '#contact' },

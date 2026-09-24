@@ -30,7 +30,7 @@ export default function ProfileImage({
               loading="eager"
             />
           ) : (
-            // Clean Luxury Monogram Fallback (No synthetic AI face)
+            // Clean Luxury Monogram Fallback
             <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#0c1611] to-[#050806] text-amber-300 font-mono font-bold text-xs sm:text-sm tracking-tighter">
               {PROFILE.initials}
             </div>
@@ -43,26 +43,27 @@ export default function ProfileImage({
     );
   }
 
-  // Hero section prominent portrait
+  // Hero section prominent portrait:
+  // Circular portrait with subtle deep-green border, soft glow, elegant shadow, and smooth entrance animation
   return (
     <div className={`relative group ${className}`}>
-      {/* Ambient background glow */}
-      <div className="absolute -inset-3 sm:-inset-4 rounded-full bg-gradient-to-tr from-emerald-600/30 via-emerald-400/10 to-amber-500/25 blur-2xl opacity-80 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      {/* Soft ambient glow */}
+      <div className="absolute -inset-3 sm:-inset-4 rounded-full bg-gradient-to-tr from-emerald-600/35 via-emerald-500/20 to-amber-500/25 blur-2xl opacity-75 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-      {/* Decorative Outer Border Ring with subtle gradient */}
-      <div className="relative w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full p-2 bg-gradient-to-tr from-emerald-600/60 via-emerald-400/20 to-amber-400/50 shadow-[0_0_40px_rgba(16,185,129,0.22)] group-hover:shadow-[0_0_55px_rgba(16,185,129,0.35)] transition-all duration-500">
-        <div className="w-full h-full rounded-full overflow-hidden border border-emerald-800/40 bg-[#070c09] flex items-center justify-center relative">
+      {/* Subtle deep-green border with soft glow and elegant shadow */}
+      <div className="relative w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 rounded-full p-2 bg-gradient-to-tr from-emerald-700/80 via-emerald-600/50 to-emerald-500/40 border border-emerald-500/40 shadow-[0_0_35px_rgba(16,185,129,0.28)] group-hover:shadow-[0_0_50px_rgba(16,185,129,0.42)] transition-all duration-500">
+        <div className="w-full h-full rounded-full overflow-hidden border-2 border-emerald-900/60 bg-[#070c09] flex items-center justify-center relative shadow-2xl">
           {!imgError ? (
             <img
               src={src}
               alt={alt}
               onError={() => setImgError(true)}
               className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+              loading="eager"
             />
           ) : (
-            // Clean Luxury Monogram Fallback Portrait (State-of-the-art dark aesthetic)
+            // Clean Luxury Monogram Fallback Portrait
             <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-gradient-to-b from-[#0a140f] via-[#070c09] to-[#050806]">
-              {/* Subtle Tech Grid lines */}
               <div
                 className="absolute inset-0 opacity-[0.07] pointer-events-none"
                 style={{
@@ -72,7 +73,6 @@ export default function ProfileImage({
                 }}
               />
 
-              {/* Central Luxury Emblem */}
               <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-br from-emerald-600 to-amber-500 p-0.5 shadow-[0_0_25px_rgba(16,185,129,0.25)] group-hover:scale-105 transition-transform duration-300">
                 <div className="w-full h-full bg-[#080d0a] rounded-[14px] flex items-center justify-center">
                   <span className="font-mono text-3xl sm:text-4xl font-extrabold bg-gradient-to-tr from-emerald-400 via-emerald-200 to-amber-300 bg-clip-text text-transparent">
@@ -81,7 +81,6 @@ export default function ProfileImage({
                 </div>
               </div>
 
-              {/* Fallback Identity Text */}
               <div className="relative z-10 mt-3 sm:mt-4">
                 <span className="block text-white font-bold text-sm sm:text-base tracking-tight">
                   {PROFILE.name}
@@ -93,14 +92,6 @@ export default function ProfileImage({
             </div>
           )}
         </div>
-      </div>
-
-      {/* Floating Experience & Status Badge */}
-      <div className="absolute -bottom-2 -right-1 sm:bottom-2 sm:right-2 bg-[#090f0c]/95 border border-emerald-800/60 rounded-xl px-3 py-1.5 shadow-[0_8px_20px_rgba(0,0,0,0.7)] backdrop-blur-md flex items-center gap-2 pointer-events-none group-hover:border-amber-400/40 transition-colors">
-        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-        <span className="text-[11px] font-mono font-medium text-neutral-200">
-          Frontend &amp; Educator
-        </span>
       </div>
     </div>
   );

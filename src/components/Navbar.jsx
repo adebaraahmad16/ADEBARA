@@ -90,12 +90,17 @@ export default function Navbar({ onOpenCV }) {
 
         {/* Action Buttons */}
         <div className="hidden sm:flex items-center gap-3">
-          <button
-            onClick={onOpenCV}
-            className="text-xs font-semibold px-4 py-2 rounded-full border border-amber-500/30 text-amber-300 hover:bg-amber-500/10 hover:border-amber-400 transition-all duration-200 cursor-pointer"
+          <a
+            href="/docs/Adebara-Bamigbola-Ahmad-CV.docx"
+            download="Adebara-Bamigbola-Ahmad-CV.docx"
+            className="text-xs font-semibold px-4 py-2 rounded-full border border-amber-500/30 text-amber-300 hover:bg-amber-500/10 hover:border-amber-400 transition-all duration-200 cursor-pointer flex items-center gap-1.5"
+            title="Download CV Document"
           >
-            Download CV
-          </button>
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            <span>Download CV</span>
+          </a>
           <a
             href="#contact"
             className="text-xs font-semibold px-4 py-2 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-white hover:from-emerald-500 hover:to-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all duration-200"
@@ -151,15 +156,18 @@ export default function Navbar({ onOpenCV }) {
               );
             })}
             <div className="pt-3 border-t border-emerald-950 flex flex-col gap-2.5">
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenCV();
-                }}
-                className="w-full text-center text-xs font-semibold py-2.5 rounded-lg border border-amber-500/30 text-amber-300 hover:bg-amber-500/10 cursor-pointer"
+              <a
+                href="/docs/Adebara-Bamigbola-Ahmad-CV.docx"
+                download="Adebara-Bamigbola-Ahmad-CV.docx"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full text-center text-xs font-semibold py-2.5 rounded-lg border border-amber-500/30 text-amber-300 hover:bg-amber-500/10 cursor-pointer flex items-center justify-center gap-1.5"
+                title="Download CV Document"
               >
-                Download CV
-              </button>
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                <span>Download CV (.docx)</span>
+              </a>
               <a
                 href="#contact"
                 onClick={() => setMobileMenuOpen(false)}
