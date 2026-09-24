@@ -227,14 +227,29 @@ function ProjectModal({ project, mode, onClose }) {
         </div>
 
         {/* Modal Actions */}
-        <div className="pt-4 border-t border-neutral-800 flex items-center justify-between gap-3">
-          <a
-            href="#contact"
-            onClick={onClose}
-            className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors"
-          >
-            Inquire About This Project →
-          </a>
+        <div className="pt-4 border-t border-neutral-800 flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors flex items-center gap-1.5"
+              >
+                <span>Visit Live Application</span>
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            )}
+            <a
+              href="#contact"
+              onClick={onClose}
+              className="px-4 py-2 rounded-xl bg-[#111914] border border-neutral-700 hover:border-emerald-500/50 text-neutral-300 hover:text-white text-xs font-semibold transition-colors"
+            >
+              Inquire →
+            </a>
+          </div>
           <button
             onClick={onClose}
             className="px-4 py-2 rounded-xl bg-[#0f1712] border border-neutral-700 text-neutral-300 hover:text-white text-xs font-semibold"

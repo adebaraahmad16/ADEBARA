@@ -1,13 +1,14 @@
 import ProjectCard from './ProjectCard';
 
 export default function Projects({ onSelectProject }) {
-  // All portfolio projects with dedicated screenshots and details
+  // All portfolio projects with dedicated screenshots and verified live production URLs
   const projects = [
     {
       id: 'poultrypro',
       title: 'PoultryPro',
       tagline: 'Poultry Management Platform',
       projectImage: '/projects/poultrypro.png',
+      liveUrl: 'https://poultry-pro-pi.vercel.app/',
       status: 'Production Ready',
       statusColor: 'bg-emerald-950/80 text-emerald-300 border-emerald-500/40',
       role: 'Frontend Developer & Creator',
@@ -23,13 +24,13 @@ export default function Projects({ onSelectProject }) {
       mockupBg: 'from-emerald-950/40 via-[#0a120e] to-amber-950/40',
       accentColor: 'text-emerald-400',
       githubAvailable: true,
-      liveUrl: 'http://localhost:5175',
     },
     {
       id: 'tradehub',
       title: 'TradeHub',
       tagline: 'Multi-Vendor Marketplace Platform',
       projectImage: '/projects/tradehub.png',
+      liveUrl: 'https://marketplace-nine-ashen.vercel.app',
       status: 'Production Ready',
       statusColor: 'bg-emerald-950/80 text-emerald-300 border-emerald-500/40',
       role: 'Frontend Developer',
@@ -51,6 +52,7 @@ export default function Projects({ onSelectProject }) {
       title: 'Free Learning Hub',
       tagline: 'Education Resource & School Portal',
       projectImage: '/projects/free-learning-hub.png',
+      liveUrl: 'https://learn-bridge-three.vercel.app/',
       status: 'Production Ready',
       statusColor: 'bg-blue-950/80 text-blue-300 border-blue-500/40',
       role: 'Frontend Developer & Educator',
@@ -72,6 +74,7 @@ export default function Projects({ onSelectProject }) {
       title: 'NOBELLE',
       tagline: 'Modern African Fashion E-Commerce Experience',
       projectImage: '/projects/nobelle.png',
+      liveUrl: 'https://nobelle-seven.vercel.app/',
       status: 'Production Ready',
       statusColor: 'bg-amber-950/80 text-amber-300 border-amber-500/40',
       role: 'Frontend Developer',
