@@ -35,8 +35,6 @@ export const PROFILE = {
     'Digital Educator',
     'React & UI Specialist',
   ],
-
-  availability: 'Available for Frontend & Training Opportunities',
 };
 
 export default PROFILE;

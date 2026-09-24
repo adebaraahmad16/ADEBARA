@@ -70,14 +70,6 @@ export default function Hero({ onOpenCV }) {
               mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}
           >
-            {/* Availability Indicator */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#0a120e] border border-emerald-800/40 text-xs font-medium text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.12)]">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              <span>{PROFILE.availability}</span>
-            </div>
 
             {/* Main Headline Introduction */}
             <div>
