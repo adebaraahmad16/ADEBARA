@@ -196,7 +196,7 @@ export default function Skills() {
         {(activeTab === 'all' || activeTab === 'frontend') && (
           <div className="mb-12">
             <div className="flex items-center gap-2.5 mb-6">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#22c55e]" />
+              <span className="" />
               <h3 className="text-lg font-bold text-white tracking-wide">
                 Frontend Engineering Technologies
               </h3>
@@ -231,7 +231,7 @@ export default function Skills() {
         {(activeTab === 'all' || activeTab === 'professional') && (
           <div>
             <div className="flex items-center gap-2.5 mb-6">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#c9a84c]" />
+              <span className="" />
               <h3 className="text-lg font-bold text-white tracking-wide">
                 Professional Leadership & Teaching
               </h3>
