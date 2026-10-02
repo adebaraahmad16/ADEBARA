@@ -39,47 +39,43 @@ export default function Navbar({ onOpenCV }) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-[#050806]/92 backdrop-blur-md border-b border-emerald-900/35 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.85)]'
-          : 'bg-[#050806]/75 backdrop-blur-md border-b border-emerald-950/50 py-3.5 sm:py-4 shadow-[0_4px_20px_rgba(0,0,0,0.5)]'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 bg-[#0a0a0a] border-b border-[#27272a] ${
+        scrolled ? 'py-3 shadow-md' : 'py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between">
         {/* Compact Integrated Profile Section (Clickable to #home) */}
         <a
           href="#home"
-          className="group flex items-center gap-2.5 sm:gap-3 transition-all focus:outline-none"
+          className="group flex items-center gap-2.5 sm:gap-3 transition-colors focus:outline-none"
           aria-label={`${PROFILE.name} — Home`}
         >
           {/* Reusable Circular Profile Image */}
           <ProfileImage variant="navbar" />
 
-          {/* Profile Identity Details (Minimal & Clean) */}
+          {/* Profile Identity Details */}
           <div className="flex flex-col text-left">
-            <div className="flex items-center gap-1.5">
-              <span className="text-white font-bold text-sm sm:text-base tracking-tight leading-tight group-hover:text-amber-300 transition-colors">
-                {PROFILE.name}
-              </span>
-            </div>
-            <span className="text-[11px] font-medium text-emerald-400/90 tracking-wide leading-tight hidden sm:block">
+            <span className="text-white font-bold text-sm sm:text-base tracking-tight leading-tight group-hover:text-[#c9a84c] transition-colors">
+              {PROFILE.name}
+            </span>
+            <span className="text-[11px] font-medium text-[#22c55e] tracking-wide leading-tight hidden sm:block">
               {PROFILE.primaryRole}
             </span>
           </div>
         </a>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-1 bg-[#090e0b]/85 border border-emerald-950/80 rounded-full px-4 py-1.5 backdrop-blur-md shadow-inner">
+        <nav className="hidden lg:flex items-center gap-1 bg-[#111111] border border-[#27272a] rounded-full px-3 py-1.5 shadow-sm">
           {navLinks.map((link) => {
             const isActive = activeSection === link.href.substring(1);
             return (
               <a
                 key={link.name}
                 href={link.href}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
+                className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-colors ${
                   isActive
-                    ? 'text-white bg-emerald-900/60 shadow-[0_0_12px_rgba(16,185,129,0.3)] border border-emerald-700/40'
-                    : 'text-neutral-400 hover:text-neutral-100 hover:bg-white/[0.04]'
+                    ? 'text-white bg-[#166534] border border-[#27272a]'
+                    : 'text-[#a1a1aa] hover:text-white hover:bg-[#1a1a1a]'
                 }`}
               >
                 {link.name}
@@ -93,7 +89,7 @@ export default function Navbar({ onOpenCV }) {
           <a
             href="/docs/Adebara-Bamigbola-Ahmad-CV.docx"
             download="Adebara-Bamigbola-Ahmad-CV.docx"
-            className="text-xs font-semibold px-4 py-2 rounded-full border border-amber-500/30 text-amber-300 hover:bg-amber-500/10 hover:border-amber-400 transition-all duration-200 cursor-pointer flex items-center gap-1.5"
+            className="text-xs font-semibold px-4 py-2 rounded-full border border-[#c9a84c] text-[#c9a84c] bg-[#111111] hover:bg-[#1a1a1a] transition-colors cursor-pointer flex items-center gap-1.5"
             title="Download CV Document"
           >
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -103,7 +99,7 @@ export default function Navbar({ onOpenCV }) {
           </a>
           <a
             href="#contact"
-            className="text-xs font-semibold px-4 py-2 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-white hover:from-emerald-500 hover:to-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all duration-200"
+            className="text-xs font-semibold px-4 py-2 rounded-full bg-[#166534] hover:bg-[#22c55e] text-white border border-[#27272a] transition-colors shadow-sm"
           >
             Let's Talk
           </a>
@@ -112,7 +108,7 @@ export default function Navbar({ onOpenCV }) {
         {/* Mobile Hamburger Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-2 rounded-lg text-neutral-300 hover:text-white bg-[#0a0f0d] border border-emerald-900/40 focus:outline-none"
+          className="lg:hidden p-2 rounded-lg text-[#a1a1aa] hover:text-white bg-[#151515] border border-[#27272a] focus:outline-none"
           aria-label="Toggle navigation menu"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -127,13 +123,13 @@ export default function Navbar({ onOpenCV }) {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-[59px] bg-[#060907]/98 border-b border-emerald-900/40 backdrop-blur-xl px-6 py-5 shadow-2xl transition-all">
+        <div className="lg:hidden bg-[#0a0a0a] border-b border-[#27272a] px-6 py-5 shadow-2xl transition-all">
           {/* Mobile Profile Header in drawer */}
-          <div className="flex items-center gap-3 pb-4 mb-3 border-b border-emerald-950/80">
+          <div className="flex items-center gap-3 pb-4 mb-3 border-b border-[#27272a]">
             <ProfileImage variant="navbar" />
             <div>
               <p className="text-sm font-bold text-white leading-tight">{PROFILE.name}</p>
-              <p className="text-xs text-emerald-400/90 leading-tight">{PROFILE.fullRole}</p>
+              <p className="text-xs text-[#22c55e] leading-tight">{PROFILE.fullRole}</p>
             </div>
           </div>
 
@@ -147,20 +143,20 @@ export default function Navbar({ onOpenCV }) {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                     isActive
-                      ? 'bg-emerald-900/40 text-amber-300 border border-emerald-800/40'
-                      : 'text-neutral-300 hover:bg-white/[0.04]'
+                      ? 'bg-[#166534] text-white border border-[#27272a]'
+                      : 'text-[#a1a1aa] hover:text-white hover:bg-[#151515]'
                   }`}
                 >
                   {link.name}
                 </a>
               );
             })}
-            <div className="pt-3 border-t border-emerald-950 flex flex-col gap-2.5">
+            <div className="pt-3 border-t border-[#27272a] flex flex-col gap-2.5">
               <a
                 href="/docs/Adebara-Bamigbola-Ahmad-CV.docx"
                 download="Adebara-Bamigbola-Ahmad-CV.docx"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-center text-xs font-semibold py-2.5 rounded-lg border border-amber-500/30 text-amber-300 hover:bg-amber-500/10 cursor-pointer flex items-center justify-center gap-1.5"
+                className="w-full text-center text-xs font-semibold py-2.5 rounded-lg border border-[#c9a84c] text-[#c9a84c] bg-[#111111] hover:bg-[#1a1a1a] cursor-pointer flex items-center justify-center gap-1.5"
                 title="Download CV Document"
               >
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -171,7 +167,7 @@ export default function Navbar({ onOpenCV }) {
               <a
                 href="#contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-center text-xs font-semibold py-2.5 rounded-lg bg-emerald-600 text-white hover:bg-emerald-500"
+                className="w-full text-center text-xs font-semibold py-2.5 rounded-lg bg-[#166534] text-white hover:bg-[#22c55e] border border-[#27272a]"
               >
                 Let's Talk
               </a>

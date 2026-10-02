@@ -10,7 +10,6 @@ export default function Projects({ onSelectProject }) {
       projectImage: '/projects/poultrypro.png',
       liveUrl: 'https://poultry-pro-pi.vercel.app/',
       status: 'Production Ready',
-      statusColor: 'bg-emerald-950/80 text-emerald-300 border-emerald-500/40',
       role: 'Frontend Developer & Creator',
       description:
         'A comprehensive commercial poultry farm management SaaS platform engineered with React, Tailwind CSS, and Recharts. Streamlines flock lifecycle management, feed inventory logs, egg production tracking, mortality analytics, financial records, and real-time operational reporting.',
@@ -21,8 +20,6 @@ export default function Projects({ onSelectProject }) {
         'Real-time financial summary dashboards and profitability metrics',
         'Fully responsive mobile-friendly UX for on-farm field workers',
       ],
-      mockupBg: 'from-emerald-950/40 via-[#0a120e] to-amber-950/40',
-      accentColor: 'text-emerald-400',
       githubAvailable: true,
     },
     {
@@ -32,7 +29,6 @@ export default function Projects({ onSelectProject }) {
       projectImage: '/projects/tradehub.png',
       liveUrl: 'https://marketplace-nine-ashen.vercel.app',
       status: 'Production Ready',
-      statusColor: 'bg-emerald-950/80 text-emerald-300 border-emerald-500/40',
       role: 'Frontend Developer',
       description:
         'A high-performance commercial marketplace platform delivering seamless vendor storefront browsing, dynamic product filtering, responsive cart flows, secure checkout flows, and vendor management.',
@@ -43,8 +39,6 @@ export default function Projects({ onSelectProject }) {
         'Accessible cart drawer and responsive multi-step checkout workflow',
         'Smooth micro-interactions and high-conversion UI patterns',
       ],
-      mockupBg: 'from-emerald-950/40 via-[#0a120e] to-teal-950/40',
-      accentColor: 'text-emerald-400',
       githubAvailable: true,
     },
     {
@@ -54,7 +48,6 @@ export default function Projects({ onSelectProject }) {
       projectImage: '/projects/free-learning-hub.png',
       liveUrl: 'https://learn-bridge-three.vercel.app/',
       status: 'Production Ready',
-      statusColor: 'bg-blue-950/80 text-blue-300 border-blue-500/40',
       role: 'Frontend Developer & Educator',
       description:
         'An accessible digital learning platform connecting students and educators with curated educational materials, structured curriculum portals, online CBT mock examinations, and school administrative tools.',
@@ -65,8 +58,6 @@ export default function Projects({ onSelectProject }) {
         'Fast lightweight asset delivery and mobile responsiveness for low-bandwidth',
         'Empowering underserved students with accessible digital education',
       ],
-      mockupBg: 'from-blue-950/40 via-[#0a120e] to-emerald-950/40',
-      accentColor: 'text-blue-400',
       githubAvailable: true,
     },
     {
@@ -76,7 +67,6 @@ export default function Projects({ onSelectProject }) {
       projectImage: '/projects/nobelle.png',
       liveUrl: 'https://nobelle-seven.vercel.app/',
       status: 'Production Ready',
-      statusColor: 'bg-amber-950/80 text-amber-300 border-amber-500/40',
       role: 'Frontend Developer',
       description:
         'A luxury digital storefront celebrating contemporary African haute couture. Features editorial product visuals, curated lookbooks, responsive sizing selectors, and a refined dark brand aesthetic with gold highlights.',
@@ -87,29 +77,27 @@ export default function Projects({ onSelectProject }) {
         'Interactive size and variant selectors with instant cart updates',
         'Dark luxury aesthetic with gold accents and smooth transitions',
       ],
-      mockupBg: 'from-amber-950/40 via-[#0f110c] to-yellow-950/40',
-      accentColor: 'text-amber-400',
       githubAvailable: true,
     },
   ];
 
   return (
-    <section id="projects" className="py-20 md:py-28 bg-[#040705] relative">
+    <section id="projects" className="py-20 md:py-28 bg-[#0a0a0a] relative">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-2 inline-block">
+          <span className="text-xs font-semibold uppercase tracking-widest text-[#c9a84c] mb-2 inline-block">
             Featured Works
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
             Selected Projects
           </h2>
-          <p className="mt-3 text-neutral-400 text-sm sm:text-base">
+          <p className="mt-3 text-[#a1a1aa] text-sm sm:text-base">
             Every application below is built with modern web technologies, showcasing real production interfaces with live landing page screenshots as card backgrounds.
           </p>
         </div>
 
-        {/* Polished Grid Layout: All projects visible without category filters, pagination or carousel restrictions */}
+        {/* Polished Grid Layout: All projects visible with flat solid styling */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((proj) => (
             <ProjectCard

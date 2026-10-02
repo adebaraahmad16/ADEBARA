@@ -26,9 +26,9 @@ function BackToTop() {
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       aria-label="Back to top"
-      className="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-gradient-to-tr from-emerald-600 via-emerald-500 to-amber-400 text-black font-extrabold flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.5)] transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
+      className="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-[#166534] hover:bg-[#22c55e] text-white font-extrabold flex items-center justify-center border border-[#27272a] shadow-lg transition-colors duration-200 cursor-pointer"
     >
-      <svg className="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 15l7-7 7 7" />
       </svg>
     </button>
@@ -39,68 +39,68 @@ function CvModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
-      <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-[#090d0b] border border-emerald-800/50 p-6 sm:p-8 shadow-2xl text-left">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+      <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-[#151515] border border-[#27272a] p-6 sm:p-8 shadow-2xl text-left">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-[#111914] border border-neutral-700 text-neutral-400 hover:text-white flex items-center justify-center transition-colors"
+          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-[#1a1a1a] border border-[#27272a] text-[#a1a1aa] hover:text-white flex items-center justify-center transition-colors"
         >
           ✕
         </button>
 
         {/* CV Header */}
-        <div className="border-b border-emerald-950 pb-6 mb-6">
-          <div className="inline-block px-2.5 py-0.5 rounded text-[10px] font-mono font-semibold bg-emerald-950 text-emerald-300 border border-emerald-800/40 mb-2">
+        <div className="border-b border-[#27272a] pb-6 mb-6">
+          <div className="inline-block px-2.5 py-0.5 rounded text-[10px] font-mono font-semibold bg-[#1a1a1a] text-[#22c55e] border border-[#27272a] mb-2">
             CURRICULUM VITAE SUMMARY
           </div>
           <h3 className="text-2xl sm:text-3xl font-extrabold text-white">Adebara Ahmad</h3>
-          <p className="text-xs sm:text-sm font-semibold text-amber-400 mt-1">
-            Frontend Developer <span className="text-emerald-500">•</span> Technology Instructor <span className="text-amber-400">•</span> Digital Educator
+          <p className="text-xs sm:text-sm font-semibold text-[#c9a84c] mt-1">
+            Frontend Developer <span className="text-[#22c55e]">•</span> Technology Instructor <span className="text-[#c9a84c]">•</span> Digital Educator
           </p>
-          <p className="text-xs text-neutral-400 mt-2 leading-relaxed">
+          <p className="text-xs text-[#a1a1aa] mt-2 leading-relaxed">
             Specializing in modern web applications (React, Tailwind CSS, JavaScript) and empowering the next generation of software builders through hands-on technical instruction and project-driven mentorship.
           </p>
         </div>
 
         {/* Experience Snapshot */}
         <div className="space-y-4 mb-6">
-          <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-400">
+          <h4 className="text-xs font-bold uppercase tracking-wider text-[#22c55e]">
             Professional Experience & Teaching
           </h4>
           <div className="space-y-2 text-xs">
-            <div className="p-3 rounded-lg bg-[#0e1612] border border-emerald-950">
+            <div className="p-3 rounded-lg bg-[#111111] border border-[#27272a]">
               <span className="font-bold text-white">KidsTech Africa Summer Bootcamp 2026</span>
-              <p className="text-neutral-400 mt-0.5">Lead Technology Instructor & Frontend Mentorship</p>
+              <p className="text-[#a1a1aa] mt-0.5">Lead Technology Instructor & Frontend Mentorship</p>
             </div>
-            <div className="p-3 rounded-lg bg-[#0e1612] border border-emerald-950">
+            <div className="p-3 rounded-lg bg-[#111111] border border-[#27272a]">
               <span className="font-bold text-white">Kwara Coding & Digital Literacy Programme (2024, 2026)</span>
-              <p className="text-neutral-400 mt-0.5">Frontend & Digital Literacy Trainer — Mentored students winning 6/10 awards and Top 10 national ranks.</p>
+              <p className="text-[#a1a1aa] mt-0.5">Frontend & Digital Literacy Trainer — Mentored students winning 6/10 awards and Top 10 national ranks.</p>
             </div>
-            <div className="p-3 rounded-lg bg-[#0e1612] border border-emerald-950">
+            <div className="p-3 rounded-lg bg-[#111111] border border-[#27272a]">
               <span className="font-bold text-white">Flora School</span>
-              <p className="text-neutral-400 mt-0.5">Technology & Coding Instructor — Structured digital literacy and web foundations.</p>
+              <p className="text-[#a1a1aa] mt-0.5">Technology & Coding Instructor — Structured digital literacy and web foundations.</p>
             </div>
-            <div className="p-3 rounded-lg bg-[#0e1612] border border-emerald-950">
+            <div className="p-3 rounded-lg bg-[#111111] border border-[#27272a]">
               <span className="font-bold text-white">KidsTech Africa</span>
-              <p className="text-neutral-400 mt-0.5">Technology Instructor & Frontend Mentor</p>
+              <p className="text-[#a1a1aa] mt-0.5">Technology Instructor & Frontend Mentor</p>
             </div>
           </div>
         </div>
 
         {/* Certifications Snapshot */}
         <div className="space-y-3 mb-6">
-          <h4 className="text-xs font-bold uppercase tracking-wider text-amber-400">
+          <h4 className="text-xs font-bold uppercase tracking-wider text-[#c9a84c]">
             Certifications
           </h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-            <div className="p-3 rounded-lg bg-[#0e1612] border border-amber-900/30">
+            <div className="p-3 rounded-lg bg-[#111111] border border-[#27272a]">
               <span className="font-bold text-white">Web Development Using React & Tailwind CSS</span>
-              <span className="block text-[10px] text-amber-400 font-mono mt-0.5">2026</span>
+              <span className="block text-[10px] text-[#c9a84c] font-mono mt-0.5">2026</span>
             </div>
-            <div className="p-3 rounded-lg bg-[#0e1612] border border-emerald-950">
+            <div className="p-3 rounded-lg bg-[#111111] border border-[#27272a]">
               <span className="font-bold text-white">Frontend Web Development</span>
-              <span className="block text-[10px] text-emerald-400 font-mono mt-0.5">2022</span>
+              <span className="block text-[10px] text-[#22c55e] font-mono mt-0.5">2022</span>
             </div>
           </div>
         </div>
@@ -112,19 +112,19 @@ function CvModal({ isOpen, onClose }) {
           </h4>
           <div className="flex flex-wrap gap-1.5 text-[11px]">
             {['React', 'Tailwind CSS', 'JavaScript (ES6+)', 'HTML5', 'CSS3', 'Bootstrap', 'Teaching', 'Mentorship', 'Problem Solving'].map((s) => (
-              <span key={s} className="px-2.5 py-1 rounded bg-[#060907] border border-emerald-900/40 text-neutral-300">
+              <span key={s} className="px-2.5 py-1 rounded bg-[#111111] border border-[#27272a] text-white">
                 {s}
               </span>
             ))}
           </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="pt-4 border-t border-neutral-800 flex items-center justify-between gap-3">
+        {/* Action Buttons with Solid Colors */}
+        <div className="pt-4 border-t border-[#27272a] flex items-center justify-between gap-3">
           <a
             href="/docs/Adebara-Bamigbola-Ahmad-CV.docx"
             download="Adebara-Bamigbola-Ahmad-CV.docx"
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white text-xs font-semibold flex items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all cursor-pointer"
+            className="px-4 py-2 rounded-xl bg-[#166534] hover:bg-[#22c55e] text-white text-xs font-semibold flex items-center gap-1.5 border border-[#27272a] shadow-sm transition-colors cursor-pointer"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -133,7 +133,7 @@ function CvModal({ isOpen, onClose }) {
           </a>
           <button
             onClick={() => window.print()}
-            className="px-4 py-2 rounded-xl bg-[#0e1612] border border-neutral-700 hover:border-emerald-500/50 text-neutral-300 hover:text-white text-xs font-semibold flex items-center gap-1.5 transition-colors"
+            className="px-4 py-2 rounded-xl bg-[#1a1a1a] hover:bg-[#27272a] border border-[#27272a] text-white text-xs font-semibold flex items-center gap-1.5 transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
@@ -142,7 +142,7 @@ function CvModal({ isOpen, onClose }) {
           </button>
           <button
             onClick={onClose}
-            className="px-4 py-2 rounded-xl bg-[#0f1712] border border-neutral-700 text-neutral-300 hover:text-white text-xs font-semibold"
+            className="px-4 py-2 rounded-xl bg-[#1a1a1a] hover:bg-[#27272a] border border-[#27272a] text-[#a1a1aa] hover:text-white text-xs font-semibold"
           >
             Close
           </button>
@@ -156,30 +156,30 @@ function ProjectModal({ project, mode, onClose }) {
   if (!project) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
-      <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-[#090d0b] border border-emerald-800/50 p-6 sm:p-8 shadow-2xl text-left">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+      <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-[#151515] border border-[#27272a] p-6 sm:p-8 shadow-2xl text-left">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-[#111914] border border-neutral-700 text-neutral-400 hover:text-white flex items-center justify-center transition-colors"
+          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-[#1a1a1a] border border-[#27272a] text-[#a1a1aa] hover:text-white flex items-center justify-center transition-colors"
         >
           ✕
         </button>
 
         {/* Modal Header */}
-        <div className="border-b border-emerald-950 pb-5 mb-5">
+        <div className="border-b border-[#27272a] pb-5 mb-5">
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800/40">
+            <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-[#1a1a1a] text-[#22c55e] border border-[#27272a]">
               {project.status}
             </span>
-            <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-[#111a14] text-neutral-400 border border-neutral-800">
+            <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-[#1a1a1a] text-[#a1a1aa] border border-[#27272a]">
               {project.role}
             </span>
           </div>
           <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
             {project.title}
           </h3>
-          <p className="text-xs sm:text-sm text-amber-400 font-medium mt-1">
+          <p className="text-xs sm:text-sm text-[#c9a84c] font-medium mt-1">
             {project.tagline}
           </p>
         </div>
@@ -187,22 +187,22 @@ function ProjectModal({ project, mode, onClose }) {
         {/* Project Description */}
         <div className="space-y-4 mb-6">
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-1.5">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#22c55e] mb-1.5">
               Project Overview
             </h4>
-            <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
               {project.description}
             </p>
           </div>
 
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#c9a84c] mb-2">
               Key Frontend Architecture & Features
             </h4>
             <ul className="space-y-2">
               {project.highlights.map((h, i) => (
-                <li key={i} className="flex items-start gap-2 text-xs text-neutral-300">
-                  <span className="text-emerald-400 font-bold mt-0.5">✓</span>
+                <li key={i} className="flex items-start gap-2 text-xs text-[#a1a1aa]">
+                  <span className="text-[#22c55e] font-bold mt-0.5">✓</span>
                   <span>{h}</span>
                 </li>
               ))}
@@ -217,7 +217,7 @@ function ProjectModal({ project, mode, onClose }) {
               {project.technologies.map((t) => (
                 <span
                   key={t}
-                  className="text-[11px] px-2.5 py-1 rounded-md bg-[#050806] text-neutral-300 border border-emerald-900/40 font-mono"
+                  className="text-[11px] px-2.5 py-1 rounded-md bg-[#1a1a1a] text-white border border-[#27272a] font-mono"
                 >
                   {t}
                 </span>
@@ -227,14 +227,14 @@ function ProjectModal({ project, mode, onClose }) {
         </div>
 
         {/* Modal Actions */}
-        <div className="pt-4 border-t border-neutral-800 flex flex-wrap items-center justify-between gap-3">
+        <div className="pt-4 border-t border-[#27272a] flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors flex items-center gap-1.5"
+                className="px-4 py-2 rounded-xl bg-[#166534] hover:bg-[#22c55e] text-white text-xs font-semibold border border-[#27272a] transition-colors flex items-center gap-1.5 shadow-sm"
               >
                 <span>Visit Live Application</span>
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -245,14 +245,14 @@ function ProjectModal({ project, mode, onClose }) {
             <a
               href="#contact"
               onClick={onClose}
-              className="px-4 py-2 rounded-xl bg-[#111914] border border-neutral-700 hover:border-emerald-500/50 text-neutral-300 hover:text-white text-xs font-semibold transition-colors"
+              className="px-4 py-2 rounded-xl bg-[#1a1a1a] border border-[#27272a] hover:border-[#166534] text-white text-xs font-semibold transition-colors"
             >
               Inquire →
             </a>
           </div>
           <button
             onClick={onClose}
-            className="px-4 py-2 rounded-xl bg-[#0f1712] border border-neutral-700 text-neutral-300 hover:text-white text-xs font-semibold"
+            className="px-4 py-2 rounded-xl bg-[#1a1a1a] hover:bg-[#27272a] border border-[#27272a] text-[#a1a1aa] hover:text-white text-xs font-semibold"
           >
             Close Preview
           </button>
@@ -268,7 +268,7 @@ export default function App() {
   const [projectModalMode, setProjectModalMode] = useState('view');
 
   return (
-    <div className="min-h-screen bg-[#050806] text-white font-sans selection:bg-emerald-500 selection:text-black">
+    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-[#22c55e] selection:text-black">
       <Navbar onOpenCV={() => setCvModalOpen(true)} />
       <main>
         <Hero onOpenCV={() => setCvModalOpen(true)} />

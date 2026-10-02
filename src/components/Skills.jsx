@@ -32,7 +32,7 @@ export default function Skills() {
       badge: 'ES6+ Logic',
       description: 'Modern asynchronous programming, DOM manipulation, functional paradigms, and API handling.',
       icon: (
-        <svg className="w-5 h-5 text-amber-400" viewBox="0 0 24 24" fill="currentColor">
+        <svg className="w-5 h-5 text-[#c9a84c]" viewBox="0 0 24 24" fill="currentColor">
           <path d="M3 3h18v18H3V3zm10.5 13.5c0 1.4.9 2 2.3 2 1.3 0 2-.6 2-1.7v-4.3h-2v4.2c0 .4-.2.6-.6.6s-.5-.2-.5-.6v-4.2h-2.2v4zm-6.2-1.1c.3.7.8 1.1 1.6 1.1.7 0 1.2-.4 1.2-1 0-.7-.5-.9-1.4-1.3l-.5-.2c-1.3-.6-2.1-1.3-2.1-2.7 0-1.5 1.2-2.7 2.8-2.7 1.3 0 2.2.6 2.7 1.6l-1.3.8c-.3-.5-.7-.8-1.4-.8-.7 0-1.1.4-1.1.9 0 .6.4.8 1.3 1.2l.5.2c1.4.6 2.2 1.4 2.2 2.8 0 1.7-1.3 2.8-3.1 2.8-1.6 0-2.6-.8-3.1-1.9l1.6-.8z" />
         </svg>
       ),
@@ -43,7 +43,7 @@ export default function Skills() {
       badge: 'SPA Architecture',
       description: 'Reusable components, custom hooks, state management, virtual DOM, and modern lifecycle workflows.',
       icon: (
-        <svg className="w-5 h-5 text-cyan-400" viewBox="0 0 24 24" fill="currentColor">
+        <svg className="w-5 h-5 text-[#22c55e]" viewBox="0 0 24 24" fill="currentColor">
           <circle cx="12" cy="12" r="2.2" />
           <path d="M12 2.5c-4.5 0-9 4-9 9.5s4.5 9.5 9 9.5 9-4 9-9.5-4.5-9.5-9-9.5zm0 17c-3.6 0-7.2-3.3-7.2-7.5S8.4 4.5 12 4.5s7.2 3.3 7.2 7.5-3.6 7.5-7.2 7.5z" />
         </svg>
@@ -53,7 +53,7 @@ export default function Skills() {
       name: 'Tailwind CSS',
       category: 'Frontend',
       badge: 'Utility Styling',
-      description: 'Rapid, responsive UI building, bespoke theme tokens, micro-animations, and minimal asset overhead.',
+      description: 'Rapid, responsive UI building, bespoke theme tokens, micro-interactions, and minimal asset overhead.',
       icon: (
         <svg className="w-5 h-5 text-teal-400" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 6c-3.3 0-5.3 1.7-6 5 1.3-1.7 2.9-2.2 4.7-1.7 1 0.3 1.7 1 2.5 1.8 1.3 1.3 2.8 2.9 6.8 2.9 3.3 0 5.3-1.7 6-5-1.3 1.7-2.9 2.2-4.7 1.7-1-0.3-1.7-1-2.5-1.8C17.5 7.6 16 6 12 6zm-6 6c-3.3 0-5.3 1.7-6 5 1.3-1.7 2.9-2.2 4.7-1.7 1 0.3 1.7 1 2.5 1.8C8.5 13.4 10 15 14 15c3.3 0 5.3-1.7 6-5-1.3 1.7-2.9 2.2-4.7 1.7-1-0.3-1.7-1-2.5-1.8C11.5 8.6 10 7 6 7z" />
@@ -80,7 +80,7 @@ export default function Skills() {
       badge: 'Curriculum & Delivery',
       description: 'Breaking down intricate programming concepts into structured, digestible lessons for learners of all ages.',
       icon: (
-        <svg className="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5 text-[#c9a84c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
         </svg>
       ),
@@ -91,7 +91,7 @@ export default function Skills() {
       badge: 'Talent Growth',
       description: 'One-on-one coaching, constructive code reviews, guidance toward competitions, and building student self-confidence.',
       icon: (
-        <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
         </svg>
       ),
@@ -113,7 +113,7 @@ export default function Skills() {
       badge: 'Analytical Thinking',
       description: 'Systematic debugging, decomposing complex UI requirements into modular components, and algorithmic reasoning.',
       icon: (
-        <svg className="w-5 h-5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5 text-[#c9a84c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
         </svg>
       ),
@@ -124,7 +124,7 @@ export default function Skills() {
       badge: 'Team Synergy',
       description: 'Seamless pair programming, collaborative git workflows, sprint planning, and community-driven learning cohorts.',
       icon: (
-        <svg className="w-5 h-5 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
         </svg>
       ),
@@ -143,48 +143,48 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-20 md:py-28 bg-[#050806] relative">
+    <section id="skills" className="py-20 md:py-28 bg-[#0a0a0a] relative">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <span className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-2 inline-block">
+          <span className="text-xs font-semibold uppercase tracking-widest text-[#c9a84c] mb-2 inline-block">
             Core Competencies
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
             Technical & Professional Skills
           </h2>
-          <p className="mt-3 text-neutral-400 text-sm sm:text-base">
+          <p className="mt-3 text-[#a1a1aa] text-sm sm:text-base">
             Curated skills across frontend web technologies and educational leadership — designed for building scalable interfaces and mentoring builders.
           </p>
 
-          {/* Filter Pills */}
-          <div className="flex items-center justify-center gap-2 mt-8">
+          {/* Filter Pills with Solid Colors */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
             <button
               onClick={() => setActiveTab('all')}
-              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
+              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-colors ${
                 activeTab === 'all'
-                  ? 'bg-emerald-600 text-white shadow-[0_0_15px_rgba(16,185,129,0.3)]'
-                  : 'bg-[#0a0f0d] text-neutral-400 border border-emerald-950 hover:text-white'
+                  ? 'bg-[#166534] text-white border border-[#27272a]'
+                  : 'bg-[#151515] text-[#a1a1aa] border border-[#27272a] hover:text-white'
               }`}
             >
               All Skills ({frontendSkills.length + professionalSkills.length})
             </button>
             <button
               onClick={() => setActiveTab('frontend')}
-              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
+              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-colors ${
                 activeTab === 'frontend'
-                  ? 'bg-emerald-600 text-white shadow-[0_0_15px_rgba(16,185,129,0.3)]'
-                  : 'bg-[#0a0f0d] text-neutral-400 border border-emerald-950 hover:text-white'
+                  ? 'bg-[#166534] text-white border border-[#27272a]'
+                  : 'bg-[#151515] text-[#a1a1aa] border border-[#27272a] hover:text-white'
               }`}
             >
               Frontend Tech ({frontendSkills.length})
             </button>
             <button
               onClick={() => setActiveTab('professional')}
-              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
+              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-colors ${
                 activeTab === 'professional'
-                  ? 'bg-amber-600 text-white shadow-[0_0_15px_rgba(217,119,6,0.3)]'
-                  : 'bg-[#0a0f0d] text-neutral-400 border border-emerald-950 hover:text-white'
+                  ? 'bg-[#166534] text-white border border-[#27272a]'
+                  : 'bg-[#151515] text-[#a1a1aa] border border-[#27272a] hover:text-white'
               }`}
             >
               Professional & Teaching ({professionalSkills.length})
@@ -196,7 +196,7 @@ export default function Skills() {
         {(activeTab === 'all' || activeTab === 'frontend') && (
           <div className="mb-12">
             <div className="flex items-center gap-2.5 mb-6">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#22c55e]" />
               <h3 className="text-lg font-bold text-white tracking-wide">
                 Frontend Engineering Technologies
               </h3>
@@ -205,20 +205,20 @@ export default function Skills() {
               {frontendSkills.map((skill) => (
                 <div
                   key={skill.name}
-                  className="group p-5 rounded-2xl bg-[#090e0b] border border-emerald-900/30 hover:border-emerald-500/40 transition-all duration-300 hover:-translate-y-1 shadow-md hover:shadow-[0_12px_24px_rgba(0,0,0,0.6)]"
+                  className="p-5 rounded-2xl bg-[#151515] border border-[#27272a] hover:border-[#166534] transition-colors duration-200 shadow-md"
                 >
                   <div className="flex items-center justify-between mb-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#0e1612] border border-emerald-800/30 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="w-10 h-10 rounded-xl bg-[#1a1a1a] border border-[#27272a] flex items-center justify-center">
                       {skill.icon}
                     </div>
-                    <span className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800/40">
+                    <span className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full bg-[#1a1a1a] text-[#22c55e] border border-[#27272a]">
                       {skill.badge}
                     </span>
                   </div>
-                  <h4 className="text-base font-bold text-white mb-1 group-hover:text-emerald-300 transition-colors">
+                  <h4 className="text-base font-bold text-white mb-1 hover:text-[#22c55e] transition-colors">
                     {skill.name}
                   </h4>
-                  <p className="text-xs text-neutral-400 leading-relaxed">
+                  <p className="text-xs text-[#a1a1aa] leading-relaxed">
                     {skill.description}
                   </p>
                 </div>
@@ -231,7 +231,7 @@ export default function Skills() {
         {(activeTab === 'all' || activeTab === 'professional') && (
           <div>
             <div className="flex items-center gap-2.5 mb-6">
-              <span className="w-2.5 h-2.5 rounded-full bg-amber-400" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#c9a84c]" />
               <h3 className="text-lg font-bold text-white tracking-wide">
                 Professional Leadership & Teaching
               </h3>
@@ -240,20 +240,20 @@ export default function Skills() {
               {professionalSkills.map((skill) => (
                 <div
                   key={skill.name}
-                  className="group p-5 rounded-2xl bg-[#090e0b] border border-emerald-900/30 hover:border-amber-400/40 transition-all duration-300 hover:-translate-y-1 shadow-md hover:shadow-[0_12px_24px_rgba(0,0,0,0.6)]"
+                  className="p-5 rounded-2xl bg-[#151515] border border-[#27272a] hover:border-[#c9a84c] transition-colors duration-200 shadow-md"
                 >
                   <div className="flex items-center justify-between mb-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#0e1612] border border-amber-900/30 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="w-10 h-10 rounded-xl bg-[#1a1a1a] border border-[#27272a] flex items-center justify-center">
                       {skill.icon}
                     </div>
-                    <span className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full bg-amber-950/70 text-amber-300 border border-amber-800/40">
+                    <span className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full bg-[#1a1a1a] text-[#c9a84c] border border-[#27272a]">
                       {skill.badge}
                     </span>
                   </div>
-                  <h4 className="text-base font-bold text-white mb-1 group-hover:text-amber-300 transition-colors">
+                  <h4 className="text-base font-bold text-white mb-1 hover:text-[#c9a84c] transition-colors">
                     {skill.name}
                   </h4>
-                  <p className="text-xs text-neutral-400 leading-relaxed">
+                  <p className="text-xs text-[#a1a1aa] leading-relaxed">
                     {skill.description}
                   </p>
                 </div>

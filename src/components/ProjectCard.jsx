@@ -3,97 +3,97 @@ import { useState } from 'react';
 /**
  * Reusable ProjectCard component.
  * Displays the project's actual landing page screenshot as the card background,
- * covered by a finely tuned luxury dark overlay and glassmorphic container.
+ * covered by a SOLID semi-transparent dark overlay (no gradients).
  */
 export default function ProjectCard({ project, onSelectProject }) {
   const [imageError, setImageError] = useState(false);
 
   return (
     <div
-      className="group relative rounded-2xl overflow-hidden border border-emerald-900/35 hover:border-emerald-500/60 transition-all duration-500 shadow-xl hover:shadow-[0_20px_45px_rgba(0,0,0,0.85)] min-h-[440px] sm:min-h-[460px] md:min-h-[480px] flex flex-col justify-between"
+      className="group relative rounded-2xl overflow-hidden border border-[#27272a] hover:border-[#166534] bg-[#151515] transition-all duration-300 shadow-md hover:shadow-xl min-h-[460px] sm:min-h-[480px] flex flex-col justify-between"
     >
       {/* 1. Full-width Screenshot Background with Smooth Zoom on Hover */}
-      <div className="absolute inset-0 overflow-hidden bg-[#070c09]">
+      <div className="absolute inset-0 overflow-hidden bg-[#111111]">
         {!imageError && project.projectImage ? (
           <img
             src={project.projectImage}
             alt={`${project.title} landing page screenshot`}
             onError={() => setImageError(true)}
-            className="w-full h-full object-cover object-top filter brightness-[0.72] contrast-[1.05] group-hover:brightness-[0.62] group-hover:scale-105 transition-all duration-500 ease-out"
+            className="w-full h-full object-cover object-top filter brightness-[0.82] contrast-[1.05] group-hover:brightness-[0.75] group-hover:scale-105 transition-all duration-500 ease-out"
             loading="lazy"
           />
         ) : (
-          <div className={`w-full h-full bg-gradient-to-br ${project.mockupBg || 'from-[#0b1611] to-[#040705]'}`} />
+          <div className="w-full h-full bg-[#151515]" />
         )}
       </div>
 
-      {/* 2. Tuned Luxury Dark Overlay: Keeps screenshot recognizable while maintaining high readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#040705] via-[#050806]/80 to-[#040705]/45 group-hover:via-[#050806]/85 transition-colors duration-500 pointer-events-none" />
+      {/* 2. SOLID Semi-Transparent Dark Overlay (ZERO gradients) */}
+      <div className="absolute inset-0 bg-[#0a0a0a]/70 group-hover:bg-[#0a0a0a]/60 transition-colors duration-300 pointer-events-none" />
 
       {/* Top Bar Badges */}
       <div className="relative z-10 p-5 sm:p-6 flex items-center justify-between">
         <span
-          className={`text-[11px] font-semibold px-3 py-1 rounded-full border backdrop-blur-md ${project.statusColor || 'bg-emerald-950/80 text-emerald-300 border-emerald-500/40'}`}
+          className="text-[11px] font-semibold px-3 py-1 rounded-full bg-[#1a1a1a] text-[#22c55e] border border-[#27272a]"
         >
           {project.status}
         </span>
-        <span className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-[#050806]/85 text-neutral-300 border border-neutral-700/60 backdrop-blur-md">
+        <span className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-[#1a1a1a] text-[#a1a1aa] border border-[#27272a]">
           {project.role}
         </span>
       </div>
 
-      {/* 3. Card Content: Highly visible with high contrast over dark overlay */}
-      <div className="relative z-10 p-6 sm:p-7 flex flex-col space-y-4 backdrop-blur-[2px] bg-gradient-to-t from-[#040705]/95 via-[#040705]/80 to-transparent pt-6">
+      {/* 3. Card Content: Solid elevated container with crisp typography */}
+      <div className="relative z-10 p-6 sm:p-7 flex flex-col space-y-4 bg-[#111111]/95 border-t border-[#27272a]">
         <div>
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight drop-shadow-md group-hover:text-emerald-300 transition-colors duration-300">
+          <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight group-hover:text-[#22c55e] transition-colors duration-200">
             {project.title}
           </h3>
-          <p className="text-xs sm:text-sm text-amber-400 font-medium mt-1">
+          <p className="text-xs sm:text-sm text-[#c9a84c] font-medium mt-1">
             {project.tagline}
           </p>
         </div>
 
-        <p className="text-neutral-200 text-xs sm:text-sm leading-relaxed line-clamp-3 group-hover:line-clamp-none transition-all duration-300 drop-shadow">
+        <p className="text-[#a1a1aa] text-xs sm:text-sm leading-relaxed line-clamp-3 group-hover:line-clamp-none transition-all duration-300">
           {project.description}
         </p>
 
         {/* Revealed on hover / active highlights */}
         {project.highlights && project.highlights.length > 0 && (
-          <ul className="space-y-1 text-xs text-neutral-300 max-h-0 opacity-0 group-hover:max-h-24 group-hover:opacity-100 overflow-hidden transition-all duration-500 ease-out">
+          <ul className="space-y-1 text-xs text-[#a1a1aa] max-h-0 opacity-0 group-hover:max-h-24 group-hover:opacity-100 overflow-hidden transition-all duration-300 ease-out">
             {project.highlights.slice(0, 2).map((item, idx) => (
               <li key={idx} className="flex items-start gap-2">
-                <span className="text-emerald-400 font-bold mt-0.5">✓</span>
+                <span className="text-[#22c55e] font-bold mt-0.5">✓</span>
                 <span className="line-clamp-1">{item}</span>
               </li>
             ))}
           </ul>
         )}
 
-        {/* Technology Badges */}
+        {/* Technology Badges with Solid Colors */}
         <div className="flex flex-wrap gap-1.5 pt-1">
           {project.technologies.map((tech) => (
             <span
               key={tech}
-              className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-[#070d0a]/90 text-neutral-300 border border-emerald-900/60 shadow-sm"
+              className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-[#1a1a1a] text-white border border-[#27272a]"
             >
               {tech}
             </span>
           ))}
         </div>
 
-        {/* Action Buttons */}
-        <div className="pt-3 border-t border-neutral-800/80 flex items-center gap-3">
+        {/* Action Buttons with Solid Colors */}
+        <div className="pt-3 border-t border-[#27272a] flex items-center gap-3">
           {project.liveUrl ? (
             <a
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white text-xs font-bold transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] flex items-center justify-center gap-2 cursor-pointer group-hover:scale-[1.01]"
+              className="flex-1 py-2.5 px-4 rounded-xl bg-[#166534] hover:bg-[#22c55e] text-white text-xs font-bold transition-colors duration-200 border border-[#27272a] shadow-sm flex items-center justify-center gap-2 cursor-pointer"
               title={`Open ${project.title} live website`}
             >
               <span>View Project</span>
               <svg
-                className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1"
+                className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -104,11 +104,11 @@ export default function ProjectCard({ project, onSelectProject }) {
           ) : (
             <button
               onClick={() => onSelectProject(project, 'view')}
-              className="flex-1 py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white text-xs font-bold transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] flex items-center justify-center gap-2 cursor-pointer"
+              className="flex-1 py-2.5 px-4 rounded-xl bg-[#166534] hover:bg-[#22c55e] text-white text-xs font-bold transition-colors duration-200 border border-[#27272a] shadow-sm flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>View Project</span>
               <svg
-                className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1"
+                className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -121,10 +121,10 @@ export default function ProjectCard({ project, onSelectProject }) {
           {project.githubAvailable && (
             <button
               onClick={() => onSelectProject(project, 'github')}
-              className="py-2.5 px-3.5 rounded-xl bg-[#090f0c]/90 border border-neutral-700 hover:border-amber-400/60 text-neutral-300 hover:text-white text-xs font-semibold transition-all duration-300 flex items-center gap-1.5 cursor-pointer"
+              className="py-2.5 px-3.5 rounded-xl bg-[#1a1a1a] hover:bg-[#27272a] border border-[#27272a] hover:border-[#c9a84c] text-white text-xs font-semibold transition-colors duration-200 flex items-center gap-1.5 cursor-pointer"
               title="View Repository"
             >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-[#c9a84c]" fill="currentColor" viewBox="0 0 24 24">
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"

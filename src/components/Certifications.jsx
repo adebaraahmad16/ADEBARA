@@ -7,8 +7,7 @@ export default function Certifications() {
       focus:
         'Advanced component-driven architecture, state management, modern CSS workflows, performant build pipelines, and production-ready application design.',
       skills: ['React', 'Tailwind CSS', 'Component Design', 'Web Performance'],
-      accent: 'border-amber-500/40 from-amber-950/30 to-emerald-950/20',
-      sealColor: 'text-amber-400 bg-amber-950/40 border-amber-500/30',
+      sealColor: 'text-[#c9a84c] bg-[#1a1a1a] border-[#27272a]',
     },
     {
       title: 'Frontend Web Development',
@@ -17,41 +16,33 @@ export default function Certifications() {
       focus:
         'Semantic HTML5 structure, comprehensive CSS3 layout styling, core JavaScript programming, responsive multi-device design, and DOM manipulation.',
       skills: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Layouts'],
-      accent: 'border-emerald-500/40 from-emerald-950/30 to-teal-950/20',
-      sealColor: 'text-emerald-400 bg-emerald-950/40 border-emerald-500/30',
+      sealColor: 'text-[#22c55e] bg-[#1a1a1a] border-[#27272a]',
     },
   ];
 
   return (
-    <section id="certifications" className="py-20 md:py-24 bg-[#040705] relative">
+    <section id="certifications" className="py-20 md:py-24 bg-[#0a0a0a] relative">
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <span className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-2 inline-block">
+          <span className="text-xs font-semibold uppercase tracking-widest text-[#c9a84c] mb-2 inline-block">
             Verified Credentials
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
             Professional Certifications
           </h2>
-          <p className="mt-3 text-neutral-400 text-sm sm:text-base">
+          <p className="mt-3 text-[#a1a1aa] text-sm sm:text-base">
             Formal technical certifications validating specialized expertise in core frontend web development and modern React engineering.
           </p>
         </div>
 
-        {/* Prominent Certification Cards */}
+        {/* Prominent Certification Cards (Solid Colors, Zero Gradients) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {certifications.map((cert) => (
             <div
               key={cert.title}
-              className={`relative rounded-2xl bg-gradient-to-br ${cert.accent} bg-[#080d0a] border ${cert.accent.split(' ')[0]} p-7 sm:p-8 shadow-2xl hover:shadow-[0_20px_40px_rgba(0,0,0,0.8)] transition-all duration-300 hover:-translate-y-1 overflow-hidden`}
+              className="relative rounded-2xl bg-[#151515] border border-[#27272a] hover:border-[#166534] p-7 sm:p-8 shadow-xl transition-colors duration-200 overflow-hidden"
             >
-              {/* Corner Watermark Graphic */}
-              <div className="absolute -right-8 -bottom-8 w-36 h-36 opacity-5 pointer-events-none">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-              </div>
-
               {/* Header with Seal and Year */}
               <div className="flex items-center justify-between mb-6">
                 <div className={`w-12 h-12 rounded-xl border flex items-center justify-center ${cert.sealColor}`}>
@@ -64,17 +55,17 @@ export default function Certifications() {
                   </svg>
                 </div>
                 <div className="text-right">
-                  <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-[#050806] border border-neutral-700 text-amber-300">
+                  <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-[#1a1a1a] border border-[#27272a] text-[#c9a84c]">
                     Year {cert.year}
                   </span>
-                  <span className="block text-[10px] text-neutral-400 mt-1 font-mono">
+                  <span className="block text-[10px] text-[#a1a1aa] mt-1 font-mono">
                     Credential Verified
                   </span>
                 </div>
               </div>
 
               {/* Title & Badge */}
-              <span className="inline-block text-[11px] font-semibold text-emerald-400 uppercase tracking-wider mb-1.5">
+              <span className="inline-block text-[11px] font-semibold text-[#22c55e] uppercase tracking-wider mb-1.5">
                 {cert.badge}
               </span>
               <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 tracking-tight">
@@ -82,16 +73,16 @@ export default function Certifications() {
               </h3>
 
               {/* Scope & Focus */}
-              <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed mb-6">
+              <p className="text-[#a1a1aa] text-xs sm:text-sm leading-relaxed mb-6">
                 {cert.focus}
               </p>
 
               {/* Key Competencies tags */}
-              <div className="pt-4 border-t border-neutral-800/80 flex flex-wrap gap-1.5">
+              <div className="pt-4 border-t border-[#27272a] flex flex-wrap gap-1.5">
                 {cert.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="text-[11px] font-medium px-2.5 py-1 rounded-md bg-[#050806] text-neutral-300 border border-emerald-950"
+                    className="text-[11px] font-medium px-2.5 py-1 rounded-md bg-[#1a1a1a] text-white border border-[#27272a]"
                   >
                     {skill}
                   </span>
