@@ -1,40 +1,33 @@
-import { useState, useRef } from 'react';
-import emailjs from '@emailjs/browser';
+import { useState } from 'react';
 
-// ─── EmailJS credentials ─────────────────────────────────────────────────────
-// 1. Sign up free at https://www.emailjs.com
-// 2. Create a Gmail service  → paste your Service ID below
-// 3. Create an email template → paste your Template ID below
-// 4. Copy your Public Key from Account → API Keys
-const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // e.g. 'service_abc123'
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // e.g. 'template_xyz789'
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // e.g. 'AbCdEfGhIjKlMnOp'
+// ─── Web3Forms setup ──────────────────────────────────────────────────────────
+// 1. Visit https://web3forms.com/
+// 2. Enter your email: ahmadadebara04@gmail.com
+// 3. Check your inbox → copy the Access Key
+// 4. Paste it below ↓
+const WEB3FORMS_ACCESS_KEY = 'ac50bca0-bacb-4360-87bb-c2a4ec955227';
 // ─────────────────────────────────────────────────────────────────────────────
 
-// ── Validation helpers ────────────────────────────────────────────────────────
+// ── Validation ────────────────────────────────────────────────────────────────
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 function validate(fields) {
   const errors = {};
-
   if (!fields.name.trim()) {
     errors.name = 'Name is required.';
   } else if (fields.name.trim().length < 2) {
     errors.name = 'Name must be at least 2 characters.';
   }
-
   if (!fields.email.trim()) {
     errors.email = 'Email address is required.';
   } else if (!EMAIL_REGEX.test(fields.email.trim())) {
     errors.email = 'Please enter a valid email address.';
   }
-
   if (!fields.message.trim()) {
     errors.message = 'Message is required.';
   } else if (fields.message.trim().length < 10) {
     errors.message = 'Message must be at least 10 characters.';
   }
-
   return errors;
 }
 
@@ -46,85 +39,88 @@ const INITIAL_FORM = {
 };
 
 export default function Contact() {
-  const formRef                   = useRef(null);
-  const [formData, setFormData]   = useState(INITIAL_FORM);
+  const [formData, setFormData]       = useState(INITIAL_FORM);
   const [fieldErrors, setFieldErrors] = useState({});
-  const [touched, setTouched]     = useState({});
-  const [status, setStatus]       = useState({ state: 'idle', message: '' }); // idle | loading | success | error
+  const [touched, setTouched]         = useState({});
+  const [status, setStatus]           = useState({ state: 'idle', message: '' });
 
-  // ── Helpers ────────────────────────────────────────────────────────────────
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  // ── Field helpers ────────────────────────────────────────────────────────────
+  const handleChange = (name, value) => {
     const next = { ...formData, [name]: value };
     setFormData(next);
-    // re-validate touched field on change
     if (touched[name]) {
       const errs = validate(next);
       setFieldErrors((prev) => ({ ...prev, [name]: errs[name] || '' }));
     }
   };
 
-  const handleBlur = (e) => {
-    const { name } = e.target;
+  const handleBlur = (name) => {
     setTouched((prev) => ({ ...prev, [name]: true }));
     const errs = validate(formData);
     setFieldErrors((prev) => ({ ...prev, [name]: errs[name] || '' }));
   };
 
+  // ── Submit ───────────────────────────────────────────────────────────────────
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Mark all fields as touched so all errors show
-    setTouched({ name: true, email: true, message: true });
+    const allTouched = { name: true, email: true, message: true };
+    setTouched(allTouched);
     const errs = validate(formData);
-
     if (Object.values(errs).some(Boolean)) {
       setFieldErrors(errs);
-      setStatus({ state: 'error', message: 'Please fix the errors above before submitting.' });
+      setStatus({ state: 'error', message: '' });
       return;
     }
-
     setFieldErrors({});
     setStatus({ state: 'loading', message: '' });
 
     try {
-      // EmailJS sends the form fields as template variables automatically
-      // Make sure your EmailJS template uses: {{from_name}}, {{from_email}}, {{subject}}, {{message}}
-      await emailjs.sendForm(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        formRef.current,
-        { publicKey: EMAILJS_PUBLIC_KEY }
-      );
-
-      setStatus({
-        state: 'success',
-        message: "✓ Message sent! I'll get back to you within 24 hours.",
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          subject: `[Portfolio] ${formData.subject} — from ${formData.name.trim()}`,
+          message: formData.message.trim(),
+          from_name: 'Portfolio Contact Form',
+        }),
       });
-      setFormData(INITIAL_FORM);
-      setTouched({});
+
+      const data = await res.json();
+
+      if (data.success) {
+        setStatus({
+          state: 'success',
+          message: "Message sent! I'll get back to you within 24 hours.",
+        });
+        setFormData(INITIAL_FORM);
+        setTouched({});
+      } else {
+        throw new Error(data.message || 'Submission failed');
+      }
     } catch (err) {
-      console.error('EmailJS error:', err);
+      console.error('Submit error:', err);
       setStatus({
         state: 'error',
-        message:
-          'Something went wrong while sending. Please try again or reach out directly via email.',
+        message: `Failed to send: ${err.message}. Please email me directly at ahmadadebara04@gmail.com`,
       });
     }
   };
 
-  // ── Field border colour based on state ────────────────────────────────────
+  // ── Field border colour ───────────────────────────────────────────────────────
   const fieldCls = (name) => {
     const base =
       'w-full px-4 py-2.5 rounded-xl bg-[#0a0a0a] border text-xs sm:text-sm text-white placeholder-neutral-500 outline-none transition-colors';
     if (touched[name] && fieldErrors[name])
-      return `${base} border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500`;
+      return `${base} border-red-500 focus:border-red-400 focus:ring-1 focus:ring-red-500`;
     if (touched[name] && !fieldErrors[name])
-      return `${base} border-[#22c55e] focus:border-[#166534] focus:ring-1 focus:ring-[#22c55e]`;
+      return `${base} border-[#22c55e] focus:border-[#22c55e] focus:ring-1 focus:ring-[#22c55e]`;
     return `${base} border-[#27272a] focus:border-[#166534] focus:ring-1 focus:ring-[#22c55e]`;
   };
 
-  // ── Contact channels ───────────────────────────────────────────────────────
+  // ── Contact channels ──────────────────────────────────────────────────────────
   const contactChannels = [
     {
       name: 'Email',
@@ -134,7 +130,8 @@ export default function Contact() {
       href: 'mailto:ahmadadebara04@gmail.com',
       icon: (
         <svg className="w-5 h-5 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8}
+            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
       ),
     },
@@ -146,7 +143,8 @@ export default function Contact() {
       href: 'https://wa.me/2348109606739?text=Hello%20Adebara,%20I%20came%20across%20your%20portfolio',
       icon: (
         <svg className="w-5 h-5 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8}
+            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
         </svg>
       ),
     },
@@ -158,7 +156,8 @@ export default function Contact() {
       href: 'https://github.com',
       icon: (
         <svg className="w-5 h-5 text-[#c9a84c]" fill="currentColor" viewBox="0 0 24 24">
-          <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+          <path fillRule="evenodd" clipRule="evenodd"
+            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
         </svg>
       ),
     },
@@ -176,6 +175,7 @@ export default function Contact() {
     },
   ];
 
+  // ── Render ────────────────────────────────────────────────────────────────────
   return (
     <section id="contact" className="py-20 md:py-28 bg-[#111111] relative">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
@@ -196,13 +196,13 @@ export default function Contact() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
 
-          {/* ── Left Column: Contact Channels ─────────────────────────────── */}
+          {/* ── Left: Contact Channels ─────────────────────────────────── */}
           <div className="lg:col-span-5 space-y-4">
             <div className="p-6 rounded-2xl bg-[#151515] border border-[#27272a] shadow-md mb-6">
               <h3 className="text-lg font-bold text-white mb-2">Available for New Initiatives</h3>
               <p className="text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
-                Currently open for frontend development contracts, UI engineering roles, technology
-                bootcamps, and educational workshops.
+                Currently open for frontend development contracts, UI engineering roles,
+                technology bootcamps, and educational workshops.
               </p>
             </div>
 
@@ -232,7 +232,7 @@ export default function Contact() {
             ))}
           </div>
 
-          {/* ── Right Column: Contact Form ─────────────────────────────────── */}
+          {/* ── Right: Contact Form ───────────────────────────────────── */}
           <div className="lg:col-span-7">
             <div className="p-7 sm:p-9 rounded-2xl bg-[#151515] border border-[#27272a] shadow-xl">
               <h3 className="text-xl font-bold text-white mb-1">Send a Direct Message</h3>
@@ -240,37 +240,37 @@ export default function Contact() {
                 Fill out the details below and I'll respond within 24 hours.
               </p>
 
-              {/* Global status banners */}
+              {/* Success banner */}
               {status.state === 'success' && (
                 <div className="mb-6 p-4 rounded-xl bg-[#166534]/40 border border-[#22c55e] text-white text-xs sm:text-sm flex items-start gap-2.5">
-                  <span className="text-[#22c55e] text-base font-bold flex-shrink-0">✓</span>
+                  <span className="text-[#22c55e] text-lg font-bold flex-shrink-0">✓</span>
                   <span>{status.message}</span>
                 </div>
               )}
 
-              {status.state === 'error' && !Object.values(fieldErrors).some(Boolean) && (
+              {/* General error banner (only when no field-level errors) */}
+              {status.state === 'error' && status.message && (
                 <div className="mb-6 p-4 rounded-xl bg-red-950/70 border border-red-500/50 text-red-200 text-xs sm:text-sm">
                   {status.message}
                 </div>
               )}
 
-              <form ref={formRef} onSubmit={handleSubmit} noValidate className="space-y-4">
+              <form onSubmit={handleSubmit} noValidate className="space-y-4">
 
-                {/* Name + Email row */}
+                {/* Name + Email */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
                   {/* Name */}
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-300 mb-1.5">
+                    <label htmlFor="cf-name" className="block text-xs font-semibold text-neutral-300 mb-1.5">
                       Your Name <span className="text-[#c9a84c]">*</span>
                     </label>
                     <input
+                      id="cf-name"
                       type="text"
-                      name="from_name"
-                      required
                       value={formData.name}
-                      onChange={(e) => { e.target.name = 'from_name'; handleChange({ target: { name: 'name', value: e.target.value } }); }}
-                      onBlur={() => handleBlur({ target: { name: 'name' } })}
+                      onChange={(e) => handleChange('name', e.target.value)}
+                      onBlur={() => handleBlur('name')}
                       placeholder="e.g. Samuel Adeyemi"
                       className={fieldCls('name')}
                     />
@@ -283,16 +283,15 @@ export default function Contact() {
 
                   {/* Email */}
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-300 mb-1.5">
+                    <label htmlFor="cf-email" className="block text-xs font-semibold text-neutral-300 mb-1.5">
                       Your Email <span className="text-[#c9a84c]">*</span>
                     </label>
                     <input
+                      id="cf-email"
                       type="email"
-                      name="from_email"
-                      required
                       value={formData.email}
-                      onChange={(e) => handleChange({ target: { name: 'email', value: e.target.value } })}
-                      onBlur={() => handleBlur({ target: { name: 'email' } })}
+                      onChange={(e) => handleChange('email', e.target.value)}
+                      onBlur={() => handleBlur('email')}
                       placeholder="name@company.com"
                       className={fieldCls('email')}
                     />
@@ -306,11 +305,11 @@ export default function Contact() {
 
                 {/* Subject */}
                 <div>
-                  <label className="block text-xs font-semibold text-neutral-300 mb-1.5">
+                  <label htmlFor="cf-subject" className="block text-xs font-semibold text-neutral-300 mb-1.5">
                     Subject / Area of Interest
                   </label>
                   <select
-                    name="subject"
+                    id="cf-subject"
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     className="w-full px-4 py-2.5 rounded-xl bg-[#0a0a0a] border border-[#27272a] focus:border-[#166534] focus:ring-1 focus:ring-[#22c55e] text-xs sm:text-sm text-white outline-none transition-colors"
@@ -325,20 +324,19 @@ export default function Contact() {
 
                 {/* Message */}
                 <div>
-                  <label className="block text-xs font-semibold text-neutral-300 mb-1.5">
+                  <label htmlFor="cf-message" className="block text-xs font-semibold text-neutral-300 mb-1.5">
                     Message <span className="text-[#c9a84c]">*</span>
                   </label>
                   <textarea
+                    id="cf-message"
                     rows={4}
-                    name="message"
-                    required
                     value={formData.message}
-                    onChange={(e) => handleChange({ target: { name: 'message', value: e.target.value } })}
-                    onBlur={() => handleBlur({ target: { name: 'message' } })}
+                    onChange={(e) => handleChange('message', e.target.value)}
+                    onBlur={() => handleBlur('message')}
                     placeholder="Describe your project, goals, or training requirements..."
                     className={`${fieldCls('message')} resize-none`}
                   />
-                  <div className="flex items-center justify-between mt-1">
+                  <div className="flex items-start justify-between mt-1">
                     {touched.message && fieldErrors.message ? (
                       <p className="text-[11px] text-red-400 flex items-center gap-1">
                         <span>⚠</span> {fieldErrors.message}
@@ -346,17 +344,17 @@ export default function Contact() {
                     ) : (
                       <span />
                     )}
-                    <span className={`text-[11px] tabular-nums ${formData.message.length < 10 ? 'text-[#a1a1aa]' : 'text-[#22c55e]'}`}>
+                    <span className={`text-[11px] tabular-nums flex-shrink-0 ${formData.message.length < 10 ? 'text-[#a1a1aa]' : 'text-[#22c55e]'}`}>
                       {formData.message.length} chars
                     </span>
                   </div>
                 </div>
 
-                {/* Submit */}
+                {/* Submit button */}
                 <button
                   type="submit"
                   id="contact-submit-btn"
-                  disabled={status.state === 'loading'}
+                  disabled={status.state === 'loading' || status.state === 'success'}
                   className="w-full py-3 rounded-xl bg-[#166534] hover:bg-[#22c55e] text-white font-bold text-xs sm:text-sm border border-[#27272a] shadow-md transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {status.state === 'loading' ? (
@@ -365,8 +363,10 @@ export default function Contact() {
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
                       </svg>
-                      <span>Sending message...</span>
+                      <span>Sending...</span>
                     </>
+                  ) : status.state === 'success' ? (
+                    <span>✓ Message Sent</span>
                   ) : (
                     <>
                       <span>Send Message</span>
