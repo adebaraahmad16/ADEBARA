@@ -1,20 +1,134 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
+
+// ─── EmailJS credentials ─────────────────────────────────────────────────────
+// 1. Sign up free at https://www.emailjs.com
+// 2. Create a Gmail service  → paste your Service ID below
+// 3. Create an email template → paste your Template ID below
+// 4. Copy your Public Key from Account → API Keys
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // e.g. 'service_abc123'
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // e.g. 'template_xyz789'
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // e.g. 'AbCdEfGhIjKlMnOp'
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ── Validation helpers ────────────────────────────────────────────────────────
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+function validate(fields) {
+  const errors = {};
+
+  if (!fields.name.trim()) {
+    errors.name = 'Name is required.';
+  } else if (fields.name.trim().length < 2) {
+    errors.name = 'Name must be at least 2 characters.';
+  }
+
+  if (!fields.email.trim()) {
+    errors.email = 'Email address is required.';
+  } else if (!EMAIL_REGEX.test(fields.email.trim())) {
+    errors.email = 'Please enter a valid email address.';
+  }
+
+  if (!fields.message.trim()) {
+    errors.message = 'Message is required.';
+  } else if (fields.message.trim().length < 10) {
+    errors.message = 'Message must be at least 10 characters.';
+  }
+
+  return errors;
+}
+
+const INITIAL_FORM = {
+  name: '',
+  email: '',
+  subject: 'Frontend Development',
+  message: '',
+};
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: 'Frontend Development',
-    message: '',
-  });
+  const formRef                   = useRef(null);
+  const [formData, setFormData]   = useState(INITIAL_FORM);
+  const [fieldErrors, setFieldErrors] = useState({});
+  const [touched, setTouched]     = useState({});
+  const [status, setStatus]       = useState({ state: 'idle', message: '' }); // idle | loading | success | error
 
-  const [status, setStatus] = useState({ state: 'idle', message: '' });
+  // ── Helpers ────────────────────────────────────────────────────────────────
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const next = { ...formData, [name]: value };
+    setFormData(next);
+    // re-validate touched field on change
+    if (touched[name]) {
+      const errs = validate(next);
+      setFieldErrors((prev) => ({ ...prev, [name]: errs[name] || '' }));
+    }
+  };
 
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    setTouched((prev) => ({ ...prev, [name]: true }));
+    const errs = validate(formData);
+    setFieldErrors((prev) => ({ ...prev, [name]: errs[name] || '' }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Mark all fields as touched so all errors show
+    setTouched({ name: true, email: true, message: true });
+    const errs = validate(formData);
+
+    if (Object.values(errs).some(Boolean)) {
+      setFieldErrors(errs);
+      setStatus({ state: 'error', message: 'Please fix the errors above before submitting.' });
+      return;
+    }
+
+    setFieldErrors({});
+    setStatus({ state: 'loading', message: '' });
+
+    try {
+      // EmailJS sends the form fields as template variables automatically
+      // Make sure your EmailJS template uses: {{from_name}}, {{from_email}}, {{subject}}, {{message}}
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        { publicKey: EMAILJS_PUBLIC_KEY }
+      );
+
+      setStatus({
+        state: 'success',
+        message: "✓ Message sent! I'll get back to you within 24 hours.",
+      });
+      setFormData(INITIAL_FORM);
+      setTouched({});
+    } catch (err) {
+      console.error('EmailJS error:', err);
+      setStatus({
+        state: 'error',
+        message:
+          'Something went wrong while sending. Please try again or reach out directly via email.',
+      });
+    }
+  };
+
+  // ── Field border colour based on state ────────────────────────────────────
+  const fieldCls = (name) => {
+    const base =
+      'w-full px-4 py-2.5 rounded-xl bg-[#0a0a0a] border text-xs sm:text-sm text-white placeholder-neutral-500 outline-none transition-colors';
+    if (touched[name] && fieldErrors[name])
+      return `${base} border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500`;
+    if (touched[name] && !fieldErrors[name])
+      return `${base} border-[#22c55e] focus:border-[#166534] focus:ring-1 focus:ring-[#22c55e]`;
+    return `${base} border-[#27272a] focus:border-[#166534] focus:ring-1 focus:ring-[#22c55e]`;
+  };
+
+  // ── Contact channels ───────────────────────────────────────────────────────
   const contactChannels = [
     {
       name: 'Email',
       label: 'Direct Correspondence',
-      value: 'ahmadadebara04@gmail.com',
       display: 'ahmadadebara04@gmail.com',
       actionText: 'Send Email',
       href: 'mailto:ahmadadebara04@gmail.com',
@@ -27,7 +141,6 @@ export default function Contact() {
     {
       name: 'WhatsApp',
       label: 'Instant Messaging',
-      value: '+234 (8109606739)',
       display: 'Message on WhatsApp',
       actionText: 'Open Chat',
       href: 'https://wa.me/2348109606739?text=Hello%20Adebara,%20I%20came%20across%20your%20portfolio',
@@ -40,7 +153,6 @@ export default function Contact() {
     {
       name: 'GitHub',
       label: 'Code & Repositories',
-      value: 'github.com/adebara',
       display: 'View Code Profile',
       actionText: 'Open GitHub',
       href: 'https://github.com',
@@ -53,7 +165,6 @@ export default function Contact() {
     {
       name: 'LinkedIn',
       label: 'Professional Network',
-      value: 'linkedin.com/in/adebara',
       display: 'Connect on LinkedIn',
       actionText: 'Open Profile',
       href: 'https://linkedin.com',
@@ -65,27 +176,10 @@ export default function Contact() {
     },
   ];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
-      setStatus({ state: 'error', message: 'Please fill out all required fields.' });
-      return;
-    }
-
-    setStatus({ state: 'loading', message: 'Sending message...' });
-
-    setTimeout(() => {
-      setStatus({
-        state: 'success',
-        message: 'Thank you for reaching out! Your message has been received, and Adebara will follow up shortly.',
-      });
-      setFormData({ name: '', email: '', subject: 'Frontend Development', message: '' });
-    }, 900);
-  };
-
   return (
     <section id="contact" className="py-20 md:py-28 bg-[#111111] relative">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
+
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="text-xs font-semibold uppercase tracking-widest text-[#c9a84c] mb-2 inline-block">
@@ -95,19 +189,20 @@ export default function Contact() {
             Let's Work Together
           </h2>
           <p className="mt-3 text-[#a1a1aa] text-sm sm:text-base">
-            Whether you have a frontend engineering project, need a technology instructor for your bootcamp, or want to collaborate, I would love to connect.
+            Whether you have a frontend engineering project, need a technology instructor for your bootcamp,
+            or want to collaborate, I would love to connect.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          {/* Left Column: Contact Channels */}
+
+          {/* ── Left Column: Contact Channels ─────────────────────────────── */}
           <div className="lg:col-span-5 space-y-4">
             <div className="p-6 rounded-2xl bg-[#151515] border border-[#27272a] shadow-md mb-6">
-              <h3 className="text-lg font-bold text-white mb-2">
-                Available for New Initiatives
-              </h3>
+              <h3 className="text-lg font-bold text-white mb-2">Available for New Initiatives</h3>
               <p className="text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
-                Currently open for frontend development contracts, UI engineering roles, technology bootcamps, and educational workshops.
+                Currently open for frontend development contracts, UI engineering roles, technology
+                bootcamps, and educational workshops.
               </p>
             </div>
 
@@ -127,12 +222,9 @@ export default function Contact() {
                     <h4 className="text-sm font-semibold text-white group-hover:text-[#c9a84c] transition-colors">
                       {ch.name}
                     </h4>
-                    <p className="text-[11px] text-[#a1a1aa]">
-                      {ch.display}
-                    </p>
+                    <p className="text-[11px] text-[#a1a1aa]">{ch.display}</p>
                   </div>
                 </div>
-
                 <span className="text-[11px] font-semibold text-[#22c55e] group-hover:text-[#c9a84c] transition-colors">
                   {ch.actionText} →
                 </span>
@@ -140,97 +232,141 @@ export default function Contact() {
             ))}
           </div>
 
-          {/* Right Column: Clean Contact Form (Solid Colors, Zero Gradients) */}
+          {/* ── Right Column: Contact Form ─────────────────────────────────── */}
           <div className="lg:col-span-7">
             <div className="p-7 sm:p-9 rounded-2xl bg-[#151515] border border-[#27272a] shadow-xl">
-              <h3 className="text-xl font-bold text-white mb-1">
-                Send a Direct Message
-              </h3>
+              <h3 className="text-xl font-bold text-white mb-1">Send a Direct Message</h3>
               <p className="text-xs sm:text-sm text-[#a1a1aa] mb-6">
                 Fill out the details below and I'll respond within 24 hours.
               </p>
 
+              {/* Global status banners */}
               {status.state === 'success' && (
                 <div className="mb-6 p-4 rounded-xl bg-[#166534]/40 border border-[#22c55e] text-white text-xs sm:text-sm flex items-start gap-2.5">
-                  <span className="text-[#22c55e] text-base font-bold">✓</span>
+                  <span className="text-[#22c55e] text-base font-bold flex-shrink-0">✓</span>
                   <span>{status.message}</span>
                 </div>
               )}
 
-              {status.state === 'error' && (
+              {status.state === 'error' && !Object.values(fieldErrors).some(Boolean) && (
                 <div className="mb-6 p-4 rounded-xl bg-red-950/70 border border-red-500/50 text-red-200 text-xs sm:text-sm">
                   {status.message}
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form ref={formRef} onSubmit={handleSubmit} noValidate className="space-y-4">
+
+                {/* Name + Email row */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                  {/* Name */}
                   <div>
                     <label className="block text-xs font-semibold text-neutral-300 mb-1.5">
                       Your Name <span className="text-[#c9a84c]">*</span>
                     </label>
                     <input
                       type="text"
+                      name="from_name"
                       required
                       value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      onChange={(e) => { e.target.name = 'from_name'; handleChange({ target: { name: 'name', value: e.target.value } }); }}
+                      onBlur={() => handleBlur({ target: { name: 'name' } })}
                       placeholder="e.g. Samuel Adeyemi"
-                      className="w-full px-4 py-2.5 rounded-xl bg-[#0a0a0a] border border-[#27272a] focus:border-[#166534] focus:ring-1 focus:ring-[#22c55e] text-xs sm:text-sm text-white placeholder-neutral-500 outline-none transition-colors"
+                      className={fieldCls('name')}
                     />
+                    {touched.name && fieldErrors.name && (
+                      <p className="mt-1 text-[11px] text-red-400 flex items-center gap-1">
+                        <span>⚠</span> {fieldErrors.name}
+                      </p>
+                    )}
                   </div>
+
+                  {/* Email */}
                   <div>
                     <label className="block text-xs font-semibold text-neutral-300 mb-1.5">
                       Your Email <span className="text-[#c9a84c]">*</span>
                     </label>
                     <input
                       type="email"
+                      name="from_email"
                       required
                       value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      onChange={(e) => handleChange({ target: { name: 'email', value: e.target.value } })}
+                      onBlur={() => handleBlur({ target: { name: 'email' } })}
                       placeholder="name@company.com"
-                      className="w-full px-4 py-2.5 rounded-xl bg-[#0a0a0a] border border-[#27272a] focus:border-[#166534] focus:ring-1 focus:ring-[#22c55e] text-xs sm:text-sm text-white placeholder-neutral-500 outline-none transition-colors"
+                      className={fieldCls('email')}
                     />
+                    {touched.email && fieldErrors.email && (
+                      <p className="mt-1 text-[11px] text-red-400 flex items-center gap-1">
+                        <span>⚠</span> {fieldErrors.email}
+                      </p>
+                    )}
                   </div>
                 </div>
 
+                {/* Subject */}
                 <div>
                   <label className="block text-xs font-semibold text-neutral-300 mb-1.5">
                     Subject / Area of Interest
                   </label>
                   <select
+                    name="subject"
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     className="w-full px-4 py-2.5 rounded-xl bg-[#0a0a0a] border border-[#27272a] focus:border-[#166534] focus:ring-1 focus:ring-[#22c55e] text-xs sm:text-sm text-white outline-none transition-colors"
                   >
                     <option value="Frontend Development">Frontend Web Development Project</option>
-                    <option value="UI Engineering">UI Engineering & Design Systems</option>
+                    <option value="UI Engineering">UI Engineering &amp; Design Systems</option>
                     <option value="Technology Training">Technology Training / Coding Bootcamp</option>
                     <option value="Digital Literacy Mentorship">Digital Literacy Mentorship</option>
                     <option value="General Collaboration">General Collaboration Inquiry</option>
                   </select>
                 </div>
 
+                {/* Message */}
                 <div>
                   <label className="block text-xs font-semibold text-neutral-300 mb-1.5">
                     Message <span className="text-[#c9a84c]">*</span>
                   </label>
                   <textarea
                     rows={4}
+                    name="message"
                     required
                     value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    onChange={(e) => handleChange({ target: { name: 'message', value: e.target.value } })}
+                    onBlur={() => handleBlur({ target: { name: 'message' } })}
                     placeholder="Describe your project, goals, or training requirements..."
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#0a0a0a] border border-[#27272a] focus:border-[#166534] focus:ring-1 focus:ring-[#22c55e] text-xs sm:text-sm text-white placeholder-neutral-500 outline-none transition-colors resize-none"
+                    className={`${fieldCls('message')} resize-none`}
                   />
+                  <div className="flex items-center justify-between mt-1">
+                    {touched.message && fieldErrors.message ? (
+                      <p className="text-[11px] text-red-400 flex items-center gap-1">
+                        <span>⚠</span> {fieldErrors.message}
+                      </p>
+                    ) : (
+                      <span />
+                    )}
+                    <span className={`text-[11px] tabular-nums ${formData.message.length < 10 ? 'text-[#a1a1aa]' : 'text-[#22c55e]'}`}>
+                      {formData.message.length} chars
+                    </span>
+                  </div>
                 </div>
 
+                {/* Submit */}
                 <button
                   type="submit"
+                  id="contact-submit-btn"
                   disabled={status.state === 'loading'}
-                  className="w-full py-3 rounded-xl bg-[#166534] hover:bg-[#22c55e] text-white font-bold text-xs sm:text-sm border border-[#27272a] shadow-md transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                  className="w-full py-3 rounded-xl bg-[#166534] hover:bg-[#22c55e] text-white font-bold text-xs sm:text-sm border border-[#27272a] shadow-md transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {status.state === 'loading' ? (
-                    <span>Submitting message...</span>
+                    <>
+                      <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+                      </svg>
+                      <span>Sending message...</span>
+                    </>
                   ) : (
                     <>
                       <span>Send Message</span>
@@ -240,6 +376,10 @@ export default function Contact() {
                     </>
                   )}
                 </button>
+
+                <p className="text-center text-[11px] text-[#a1a1aa]">
+                  By submitting, you agree that I may use your email to respond to your inquiry.
+                </p>
               </form>
             </div>
           </div>
