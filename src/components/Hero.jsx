@@ -108,7 +108,7 @@ export default function Hero({ onOpenCV }) {
               {/* Footer status */}
               <div className="mt-3 pt-2.5 border-t border-[#27272a] flex items-center justify-between text-[11px] text-[#a1a1aa]">
                 <span className="flex items-center gap-1.5 text-[#22c55e] font-medium">
-                  <span className="w-2 h-2 rounded-full bg-[#22c55e]" />
+                  <span className="" />
                   Available for Hire &amp; Training
                 </span>
                 <span className="text-neutral-500 font-mono text-[10px]">v2.0</span>
