@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import ProfileImage from './ProfileImage';
 import PROFILE from '../data/profile';
+import { useTheme } from '../context/ThemeContext';
 
 export default function Hero({ onOpenCV }) {
   const roles = [
@@ -14,6 +15,7 @@ export default function Hero({ onOpenCV }) {
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const { isDark } = useTheme();
 
   useEffect(() => {
     setMounted(true);
@@ -162,10 +164,14 @@ export default function Hero({ onOpenCV }) {
                 View My Work
               </a>
 
-              {/* Secondary button: transparent/dark solid background with a solid border */}
+              {/* Secondary button: Contact Me */}
               <a
                 href="#contact"
-                className="px-6 py-3 rounded-xl bg-[#151515] hover:bg-[#1a1a1a] border border-[#27272a] hover:border-[#166534] text-white font-semibold text-sm transition-colors duration-200"
+                className={`px-6 py-3 rounded-xl border font-semibold text-sm transition-colors duration-200 shadow-sm ${
+                  isDark
+                    ? 'bg-[#151515] hover:bg-[#1a1a1a] border-[#27272a] hover:border-[#166534] text-white'
+                    : 'bg-white hover:bg-slate-100 border-slate-300 hover:border-[#166534] text-slate-900 hover:text-[#166534]'
+                }`}
               >
                 Contact Me
               </a>

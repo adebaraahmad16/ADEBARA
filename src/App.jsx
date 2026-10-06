@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -262,7 +263,7 @@ function ProjectModal({ project, mode, onClose }) {
   );
 }
 
-export default function App() {
+function MainPortfolio() {
   const [cvModalOpen, setCvModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
   const [projectModalMode, setProjectModalMode] = useState('view');
@@ -295,5 +296,13 @@ export default function App() {
         onClose={() => setSelectedProject(null)}
       />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <MainPortfolio />
+    </ThemeProvider>
   );
 }
