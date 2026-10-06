@@ -128,7 +128,6 @@ export default function Hero({ onOpenCV }) {
             <div>
               <p className="text-[#c9a84c] text-lg sm:text-xl md:text-2xl font-semibold tracking-wide mb-1.5 flex items-center gap-2">
                 <span>Hi, I'm</span>
-                <span className="inline-block w-8 h-[2px] bg-[#c9a84c]" />
               </p>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.08]">
                 Adebara Ahmad
