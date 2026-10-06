@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
+import ProfileImage from './components/ProfileImage';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -52,13 +53,18 @@ function CvModal({ isOpen, onClose }) {
 
         {/* CV Header */}
         <div className="border-b border-[#27272a] pb-6 mb-6">
-          <div className="inline-block px-2.5 py-0.5 rounded text-[10px] font-mono font-semibold bg-[#1a1a1a] text-[#22c55e] border border-[#27272a] mb-2">
-            CURRICULUM VITAE SUMMARY
+          <div className="flex items-start gap-4 mb-3">
+            <ProfileImage variant="card" className="w-16 h-16 sm:w-20 sm:h-20" />
+            <div className="flex-1 min-w-0">
+              <div className="inline-block px-2.5 py-0.5 rounded text-[10px] font-mono font-semibold bg-[#1a1a1a] text-[#22c55e] border border-[#27272a] mb-1.5">
+                CURRICULUM VITAE SUMMARY
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">Adebara Ahmad</h3>
+              <p className="text-xs sm:text-sm font-semibold text-[#c9a84c] mt-0.5">
+                Frontend Developer <span className="text-[#22c55e]">•</span> Technology Instructor <span className="text-[#c9a84c]">•</span> Digital Educator
+              </p>
+            </div>
           </div>
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-white">Adebara Ahmad</h3>
-          <p className="text-xs sm:text-sm font-semibold text-[#c9a84c] mt-1">
-            Frontend Developer <span className="text-[#22c55e]">•</span> Technology Instructor <span className="text-[#c9a84c]">•</span> Digital Educator
-          </p>
           <p className="text-xs text-[#a1a1aa] mt-2 leading-relaxed">
             Specializing in modern web applications (React, Tailwind CSS, JavaScript) and empowering the next generation of software builders through hands-on technical instruction and project-driven mentorship.
           </p>

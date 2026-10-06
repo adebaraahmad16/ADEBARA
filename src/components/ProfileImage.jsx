@@ -3,18 +3,28 @@ import PROFILE from '../data/profile';
 
 /**
  * Reusable ProfileImage component with 100% solid colors and zero gradients.
- * Displays the profile portrait from PROFILE.imageSrc in both Navbar and Hero sections.
- * Glow is created using subtle box-shadow only.
+ * Displays the profile portrait from PROFILE.imageSrc in Navbar, Hero, About, and Contact sections.
  */
 export default function ProfileImage({
   variant = 'navbar',
   className = '',
   alt = PROFILE.name,
-  src = PROFILE.imageSrc,
+  src = PROFILE.imageSrc || '/profile.jpeg',
 }) {
+  const [currentSrc, setCurrentSrc] = useState(src);
   const [imgError, setImgError] = useState(false);
 
-  // Navbar compact avatar
+  const handleImageError = () => {
+    if (currentSrc.endsWith('.jpeg')) {
+      setCurrentSrc('/profile.jpg');
+    } else if (currentSrc.endsWith('.jpg')) {
+      setCurrentSrc('/profile.jpeg');
+    } else {
+      setImgError(true);
+    }
+  };
+
+  // Compact avatar for Navbar & Mobile drawer
   if (variant === 'navbar') {
     return (
       <div
@@ -23,9 +33,9 @@ export default function ProfileImage({
         <div className="w-full h-full rounded-full overflow-hidden bg-[#111111] flex items-center justify-center">
           {!imgError ? (
             <img
-              src={src}
+              src={currentSrc}
               alt={alt}
-              onError={() => setImgError(true)}
+              onError={handleImageError}
               className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
               loading="eager"
             />
@@ -43,8 +53,28 @@ export default function ProfileImage({
     );
   }
 
-  // Hero section prominent portrait:
-  // Circular portrait with solid border, subtle monochromatic box-shadow, and zero gradients.
+  // Medium avatar for Cards / Callouts / Modals
+  if (variant === 'card') {
+    return (
+      <div className={`relative flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-2xl overflow-hidden border-2 border-[#166534] shadow-md bg-[#111111] ${className}`}>
+        {!imgError ? (
+          <img
+            src={currentSrc}
+            alt={alt}
+            onError={handleImageError}
+            className="w-full h-full object-cover object-top transition-transform duration-300 hover:scale-105"
+            loading="eager"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-[#151515] text-[#22c55e] font-mono font-bold text-sm">
+            {PROFILE.initials}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // Hero section prominent portrait
   return (
     <div className={`relative group ${className}`}>
       {/* Container with solid border and subtle box-shadow glow */}
@@ -52,14 +82,14 @@ export default function ProfileImage({
         <div className="w-full h-full rounded-full overflow-hidden border border-[#27272a] bg-[#111111] flex items-center justify-center relative">
           {!imgError ? (
             <img
-              src={src}
+              src={currentSrc}
               alt={alt}
-              onError={() => setImgError(true)}
+              onError={handleImageError}
               className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
               loading="eager"
             />
           ) : (
-            // Clean Luxury Monogram Fallback with Solid Colors
+            // Clean Luxury Monogram Fallback
             <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-[#151515]">
               <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-[#1a1a1a] border border-[#27272a] flex items-center justify-center shadow-inner">
                 <span className="font-mono text-3xl sm:text-4xl font-extrabold text-[#22c55e]">

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ProfileImage from './ProfileImage';
 
 // ─── Web3Forms setup ──────────────────────────────────────────────────────────
 // 1. Visit https://web3forms.com/
@@ -166,7 +167,7 @@ export default function Contact() {
       label: 'Professional Network',
       display: 'Connect on LinkedIn',
       actionText: 'Open Profile',
-      href: 'https://linkedin.com',
+      href: 'https://www.linkedin.com/in/adebara-bamigbola-ahmad',
       icon: (
         <svg className="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
           <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64c-.87 0-1.57.7-1.57 1.57s.7 1.57 1.57 1.57 1.57-.7 1.57-1.57-.7-1.57-1.57-1.57z" />
@@ -198,12 +199,15 @@ export default function Contact() {
 
           {/* ── Left: Contact Channels ─────────────────────────────────── */}
           <div className="lg:col-span-5 space-y-4">
-            <div className="p-6 rounded-2xl bg-[#151515] border border-[#27272a] shadow-md mb-6">
-              <h3 className="text-lg font-bold text-white mb-2">Available for New Initiatives</h3>
-              <p className="text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
-                Currently open for frontend development contracts, UI engineering roles,
-                technology bootcamps, and educational workshops.
-              </p>
+            <div className="p-6 rounded-2xl bg-[#151515] border border-[#27272a] shadow-md mb-6 flex items-start gap-4">
+              <ProfileImage variant="card" className="w-14 h-14 sm:w-16 sm:h-16" />
+              <div>
+                <h3 className="text-lg font-bold text-white mb-1.5">Available for New Initiatives</h3>
+                <p className="text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
+                  Currently open for frontend development contracts, UI engineering roles,
+                  technology bootcamps, and educational workshops.
+                </p>
+              </div>
             </div>
 
             {contactChannels.map((ch) => (

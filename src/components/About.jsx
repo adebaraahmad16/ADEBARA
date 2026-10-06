@@ -1,3 +1,5 @@
+import ProfileImage from './ProfileImage';
+
 export default function About() {
   const pillars = [
     {
@@ -82,13 +84,16 @@ export default function About() {
 
         {/* Bottom Banner Callout with Solid Colors (Zero Gradients) */}
         <div className="mt-12 p-6 sm:p-8 rounded-2xl bg-[#151515] border border-[#27272a] flex flex-col md:flex-row items-center justify-between gap-6 shadow-md">
-          <div className="space-y-1 text-center md:text-left">
-            <h4 className="text-base sm:text-lg font-bold text-white">
-              Committed to Modern Web Standards & Next-Gen Talent
-            </h4>
-            <p className="text-xs sm:text-sm text-[#a1a1aa]">
-              Applying clean code principles, accessible UI patterns, and hands-on teaching frameworks.
-            </p>
+          <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+            <ProfileImage variant="card" />
+            <div className="space-y-1">
+              <h4 className="text-base sm:text-lg font-bold text-white">
+                Committed to Modern Web Standards & Next-Gen Talent
+              </h4>
+              <p className="text-xs sm:text-sm text-[#a1a1aa]">
+                Applying clean code principles, accessible UI patterns, and hands-on teaching frameworks.
+              </p>
+            </div>
           </div>
           <a
             href="#experience"

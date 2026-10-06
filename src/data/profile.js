@@ -11,8 +11,7 @@ export const PROFILE = {
   greeting: "Hi, I'm Adebara Ahmad",
   
   // Path to your professional portrait in the public folder.
-  // Place your image at public/profile.jpg to have it appear automatically!
-  imageSrc: '/profile.jpg',
+  imageSrc: '/profile.jpeg',
   
   shortBio:
     'I specialize in crafting modern, responsive web experiences with clean component architectures using React and Tailwind CSS, while empowering students and future developers through hands-on technology education.',
